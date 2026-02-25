@@ -350,7 +350,7 @@ export function PricingPage() {
               gradient="bg-gradient-to-br from-violet-500 to-indigo-600"
               delay={0.2}
               ctaText={t.packages.landing.cta}
-              onCTA={() => navigate('/contact')}
+              onCTA={() => navigate('/funnel')}
             />
 
             {/* Package 2: One-Page (Popular) */}
@@ -365,7 +365,7 @@ export function PricingPage() {
               popular
               delay={0.3}
               ctaText={t.packages.onepage.cta}
-              onCTA={() => navigate('/contact')}
+              onCTA={() => navigate('/funnel')}
             />
 
             {/* Package 3: Multi-Page */}
@@ -379,7 +379,7 @@ export function PricingPage() {
               gradient="bg-gradient-to-br from-indigo-500 to-pink-600"
               delay={0.4}
               ctaText={t.packages.multipage.cta}
-              onCTA={() => navigate('/contact')}
+              onCTA={() => navigate('/funnel')}
             />
 
           </div>
@@ -451,7 +451,7 @@ export function PricingPage() {
               {t.cta.subtitle}
             </p>
             <button
-              onClick={() => navigate('/contact')}
+              onClick={() => navigate('/funnel')}
               className="group px-10 py-5 bg-gray-900 text-white rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 inline-flex items-center gap-3 shadow-xl hover:shadow-2xl"
             >
               {t.cta.button}

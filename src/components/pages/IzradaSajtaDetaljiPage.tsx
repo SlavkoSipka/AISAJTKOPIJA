@@ -1,11 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Play, ExternalLink, Star } from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
+import { ArrowRight, CheckCircle, Play, Star, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { SEOHelmet } from '../seo/SEOHelmet';
-import { trackCTAClick, trackFormSubmitAttempt, trackFormError } from '../../utils/analytics';
-import { submitFunnelForm } from '../../utils/hubspot';
 
 /* ─── useCountUp hook ─────────────────────────────────────────────────── */
 function useCountUp(target: number, duration = 1400, started = false) {
@@ -27,7 +24,6 @@ function useCountUp(target: number, duration = 1400, started = false) {
   return count;
 }
 
-/* ─── useInView hook ─────────────────────────────────────────────────── */
 function useInView(threshold = 0.25): [React.RefObject<HTMLDivElement>, boolean] {
   const ref = useRef<HTMLDivElement>(null!);
   const [inView, setInView] = useState(false);
@@ -43,7 +39,6 @@ function useInView(threshold = 0.25): [React.RefObject<HTMLDivElement>, boolean]
   return [ref, inView];
 }
 
-/* ─── useReveal hook – fade-up on scroll ─────────────────────────────── */
 function useReveal(): [React.RefObject<HTMLElement>, boolean] {
   const ref = useRef<HTMLElement>(null!);
   const [visible, setVisible] = useState(false);
@@ -59,12 +54,25 @@ function useReveal(): [React.RefObject<HTMLElement>, boolean] {
   return [ref, visible];
 }
 
-export function FunnelPage() {
+export function IzradaSajtaDetaljiPage() {
   const { language } = useLanguage();
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
 
-  /* ── Trailing cursor square ────────────────────────────────────── */
+  const [statsRef, statsInView] = useInView(0.3);
+  const c1 = useCountUp(50, 1200, statsInView);
+  const c2 = useCountUp(50, 1200, statsInView);
+  const c3 = useCountUp(100, 1400, statsInView);
+  const c4 = useCountUp(1, 800, statsInView);
+
+  const [metricsRef, metricsVisible] = useReveal();
+  const [teamRef, teamVisible] = useReveal();
+  const [reviewsRef, reviewsVisible] = useReveal();
+  const [ctaRef, ctaVisible] = useReveal();
+
+  const [expandedReviewIndex, setExpandedReviewIndex] = useState<number | null>(null);
+
+  /* ── Trailing cursor square ─────────────────────────────────── */
   const trailRef = useRef<HTMLDivElement>(null);
   const mouse = useRef({ x: -200, y: -200 });
   const pos = useRef({ x: -200, y: -200 });
@@ -78,7 +86,6 @@ export function FunnelPage() {
     const onLeave = () => {
       if (trailRef.current) trailRef.current.style.opacity = '0';
     };
-
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
     const animate = () => {
       pos.current.x = lerp(pos.current.x, mouse.current.x, 0.07);
@@ -88,7 +95,6 @@ export function FunnelPage() {
       }
       rafId.current = requestAnimationFrame(animate);
     };
-
     document.addEventListener('mousemove', onMove);
     document.addEventListener('mouseleave', onLeave);
     rafId.current = requestAnimationFrame(animate);
@@ -98,46 +104,15 @@ export function FunnelPage() {
       cancelAnimationFrame(rafId.current);
     };
   }, []);
-  /* ─────────────────────────────────────────────────────────────── */
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  /* ──────────────────────────────────────────────────────────── */
 
-  /* stats counter */
-  const [statsRef, statsInView] = useInView(0.3);
-  const c1 = useCountUp(50, 1200, statsInView);
-  const c2 = useCountUp(50, 1200, statsInView);
-  const c3 = useCountUp(100, 1400, statsInView);
-  const c4 = useCountUp(1, 800, statsInView);
-
-  /* section reveal refs */
-  const [caseRef, caseVisible] = useReveal();
-  const [metricsRef, metricsVisible] = useReveal();
-  const [teamRef, teamVisible] = useReveal();
-  const [reviewsRef, reviewsVisible] = useReveal();
-  const [ctaRef, ctaVisible] = useReveal();
-
-  /* booking widget */
   const [widgetOpen, setWidgetOpen] = useState(false);
   const [widgetAutoOpened, setWidgetAutoOpened] = useState(false);
   const [selectedDay, setSelectedDay] = useState(0);
-
-  /* sticky bottom bar */
   const [stickyBarVisible, setStickyBarVisible] = useState(false);
 
-  /* reviews expand */
-  const [expandedReviewIndex, setExpandedReviewIndex] = useState<number | null>(null);
-
-  /* auto-open widget + sticky bar visibility */
   useEffect(() => {
     const onScroll = () => {
-      /* widget auto-open */
       if (!widgetAutoOpened) {
         const scrolled = window.scrollY + window.innerHeight;
         const total = document.documentElement.scrollHeight;
@@ -146,25 +121,14 @@ export function FunnelPage() {
           setWidgetAutoOpened(true);
         }
       }
-
-      /* sticky bar: show only when hero AND booking-form are both out of view */
-      const heroEl = document.querySelector('section.pt-8') as HTMLElement | null;
-      const bookingEl = document.getElementById('booking-form');
-      const inHero = heroEl ? isElementInViewport(heroEl) : false;
-      const inBooking = bookingEl ? isElementInViewport(bookingEl) : false;
-      setStickyBarVisible(!inHero && !inBooking && window.scrollY > 60);
+      const heroEl = document.querySelector('section.pt-14') as HTMLElement | null;
+      const inHero = heroEl ? heroEl.getBoundingClientRect().bottom > 0 && heroEl.getBoundingClientRect().top < window.innerHeight : false;
+      setStickyBarVisible(!inHero && window.scrollY > 60);
     };
-
-    const isElementInViewport = (el: HTMLElement) => {
-      const rect = el.getBoundingClientRect();
-      return rect.bottom > 0 && rect.top < window.innerHeight;
-    };
-
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, [widgetAutoOpened]);
 
-  /* fixed day labels */
   const dayLabels = language === 'sr'
     ? ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
     : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -172,118 +136,85 @@ export function FunnelPage() {
   const revealClass = (v: boolean) =>
     `transition-all duration-700 ease-out ${v ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`;
 
+  const goToFunnel = () => navigate('/funnel');
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setTimeout(() => setIsVisible(true), 100);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    trackFormSubmitAttempt('funnel_booking', language);
-
-    try {
-      const result = await submitFunnelForm({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        ...(formData.message && { message: formData.message }),
-      });
-
-      if (result.success) {
-        setSubmitSuccess(true);
-        trackCTAClick('Funnel Form Submit', 'funnel_form', language);
-        navigate(`/thank-you?name=${encodeURIComponent(formData.name)}&source=funnel_booking&lang=${language}`);
-      } else {
-        throw new Error(result.message || 'Slanje nije uspelo');
-      }
-    } catch (error) {
-      trackFormError('funnel_booking', language, String(error));
-      toast.error(
-        language === 'sr'
-          ? 'Došlo je do greške. Molimo pokušajte ponovo.'
-          : 'An error occurred. Please try again.'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
   return (
     <div className="min-h-screen bg-gray-950 overflow-x-hidden relative">
-      {/* ── Trailing cursor square ────────────────────────────────── */}
+      {/* ── Trailing cursor square ─────────────────────────────── */}
       <div
         ref={trailRef}
         className="fixed top-0 left-0 z-[99999] pointer-events-none opacity-0 transition-opacity duration-200"
         style={{ willChange: 'transform' }}
       >
-        <div className="w-2 h-2 bg-violet-500 shadow-[0_0_6px_rgba(139,92,246,0.7)]" />
+        <div className="w-2 h-2 bg-pink-500 shadow-[0_0_6px_rgba(236,72,153,0.8)]" />
       </div>
-      {/* ─────────────────────────────────────────────────────────── */}
-      {/* Violet glow samo na prve 2 sekcije (hero + booking); ispod toga samo tamna pozadina */}
+      {/* ──────────────────────────────────────────────────────── */}
       <div className="fixed top-0 left-0 right-0 h-[95vh] max-h-[1200px] pointer-events-none z-0">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             background: 'radial-gradient(circle at 50% -60%, rgba(139, 92, 246, 0.35), rgba(139, 92, 246, 0.15) 40%, rgba(0, 0, 0, 0) 70%)'
           }}
-        ></div>
-        <div className="absolute -top-[500px] left-1/2 -translate-x-1/2 w-[1600px] h-[1200px] bg-violet-600/25 rounded-full blur-[150px]"></div>
-        <div className="absolute -top-[200px] left-1/2 -translate-x-1/2 w-[1000px] h-[800px] bg-pink-600/15 rounded-full blur-[130px]"></div>
-        <div className="absolute top-1/4 -left-40 w-[700px] h-[700px] bg-violet-700/12 rounded-full blur-[120px]"></div>
-        <div className="absolute top-1/3 -right-40 w-[700px] h-[700px] bg-pink-700/12 rounded-full blur-[120px]"></div>
+        />
+        <div className="absolute -top-[500px] left-1/2 -translate-x-1/2 w-[1600px] h-[1200px] bg-violet-600/25 rounded-full blur-[150px]" />
+        <div className="absolute -top-[200px] left-1/2 -translate-x-1/2 w-[1000px] h-[800px] bg-pink-600/15 rounded-full blur-[130px]" />
+        <div className="absolute top-1/4 -left-40 w-[700px] h-[700px] bg-violet-700/12 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 -right-40 w-[700px] h-[700px] bg-pink-700/12 rounded-full blur-[120px]" />
       </div>
 
       <SEOHelmet
-        title={language === 'sr' 
-          ? 'Izrada Sajta Beograd | Besplatna Ponuda i Konsultacija | AiSajt'
-          : 'Website Development Belgrade | Free Quote & Consultation | AiSajt'
+        title={language === 'sr'
+          ? 'Izrada Sajta Beograd, Srbija | Šta ti donosi dobar sajt? | AiSajt'
+          : 'Website Development Belgrade, Serbia | What a Good Site Brings You | AiSajt'
         }
         description={language === 'sr'
-          ? 'Besplatna ponuda za izradu sajta u Beogradu. Zakažite konsultaciju bez obaveze. AiSajt.'
-          : 'Free quote for your website in Belgrade. Book a consultation, no obligation. AiSajt.'
+          ? 'Izrada sajta Beograd i Srbija. Pogledaj kako dobar sajt donosi nove klijente i jaču online prisutnost. Video i detalji od AiSajt tima.'
+          : 'Website development Belgrade and Serbia. See how a good site brings new clients and stronger online presence. Video and details from AiSajt.'
         }
         keywords={language === 'sr'
-          ? 'izrada sajta beograd, besplatna ponuda sajt, izrada web sajta cena, konsultacija izrada sajta, web dizajn beograd'
-          : 'website development belgrade, free website quote, web design belgrade, seo belgrade'
+          ? 'izrada sajta beograd, izrada sajta srbija, dobar sajt, web sajt'
+          : 'website development belgrade, website serbia, good website'
         }
-        canonicalUrl="https://aisajt.com/funnel"
+        canonicalUrl="https://aisajt.com/izrada-sajta-detalji"
       />
-      <Toaster position="top-center" />
 
       <main id="main-content" className="relative z-10">
-        {/* Fixed Home button in top right corner */}
-        <button
-          onClick={() => navigate('/')}
-          className="fixed top-5 left-4 right-auto md:left-auto md:right-6 z-50 px-4 py-2 md:px-5 md:py-2.5 border border-violet-500/30 bg-gray-950/80 backdrop-blur-md text-violet-300 text-xs md:text-sm font-semibold tracking-wide rounded-full hover:bg-violet-600/20 hover:text-white hover:border-violet-400 transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_0_16px_rgba(139,92,246,0.15)]"
-        >
-          {language === 'sr' ? 'Početna' : 'Home'}
-          <ExternalLink className="w-3.5 h-3.5" />
-        </button>
+        <div className="fixed top-5 left-4 right-4 md:left-auto md:right-6 z-50 flex items-center justify-between md:justify-end gap-2">
+          <button
+            onClick={() => navigate('/')}
+            className="px-4 py-2 md:px-5 md:py-2.5 border border-violet-500/30 bg-gray-950/80 backdrop-blur-md text-violet-300 text-xs md:text-sm font-semibold tracking-wide rounded-full hover:bg-violet-600/20 hover:text-white hover:border-violet-400 transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_0_16px_rgba(139,92,246,0.15)]"
+          >
+            {language === 'sr' ? 'Početna' : 'Home'}
+            <ExternalLink className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={goToFunnel}
+            className="px-4 py-2 md:px-5 md:py-2.5 border border-violet-500/30 bg-gray-950/80 backdrop-blur-md text-violet-300 text-xs md:text-sm font-semibold tracking-wide rounded-full hover:bg-violet-600/20 hover:text-white hover:border-violet-400 transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_0_16px_rgba(139,92,246,0.15)]"
+          >
+            {language === 'sr' ? 'Zakaži poziv' : 'Book a call'}
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
 
-        {/* Hero Section – zbijen na telefonu, raspored kao referenca */}
+        {/* Hero – naslov: Izrada Sajta Beograd, Srbija – Šta ti donosi dobar sajt? */}
         <section className="pt-14 pb-6 md:pt-16 md:pb-14 relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10 w-full">
             <div className="max-w-4xl mx-auto text-center">
-
-              {/* AiSajt Logo – manji margin na telefonu */}
               <div className={`mb-3 md:mb-8 transform transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
                 <div className="flex justify-center">
-                  <img 
-                    src="/images/aisajt_providno-removebg-preview.png" 
-                    alt="AiSajt Logo" 
+                  <img
+                    src="/images/aisajt_providno-removebg-preview.png"
+                    alt="AiSajt Logo"
                     className="h-8 md:h-10 w-auto opacity-85"
                   />
                 </div>
               </div>
 
-              {/* Trust badges – na telefonu: avatari levo, tekst desno (kao referentna slika) */}
               <div className={`transform transition-all duration-700 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
                 <div className="flex flex-row items-center justify-center gap-2 md:gap-3 flex-wrap mb-3 md:mb-6">
                   <img src="/images/ljudi.webp" alt="" className="h-6 w-auto rounded-full object-cover flex-shrink-0 md:h-8" />
@@ -297,41 +228,41 @@ export function FunnelPage() {
                 </div>
               </div>
 
-              {/* Main Heading – manji razmaci na telefonu */}
               <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-2 md:mb-5">
                   {language === 'sr' ? (
-                    <>Kontaktiraj Nas Da Biste Privukli <span className="text-white">Nove</span> <span className="text-violet-300">Klijente Online</span></>
+                    <>
+                      Izrada Sajta Beograd, Srbija
+                      <span className="block mt-1 md:mt-2 text-violet-300">Sta Ti Donosi Dobar Websajt?</span>
+                    </>
                   ) : (
-                    <>Contact Us To Attract <span className="text-white">New</span> <span className="text-violet-300">Clients Online</span></>
+                    <>
+                      Website Development Belgrade, Serbia
+                      <span className="block mt-1 md:mt-2 text-violet-300">What Does A Good Website Bring You?</span>
+                    </>
                   )}
                 </h1>
               </div>
 
-              {/* Subtitle – zbijen */}
               <div className={`transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <p className="text-sm md:text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto mb-4 md:mb-8">
-                  {language === 'sr' 
+                  {language === 'sr'
                     ? 'Pogledaj šta možeš da dobiješ od sajta koji ima dokazani sistem privlačenja klijenata.'
                     : 'See what you can get from a website with a proven system for attracting clients.'
                   }
                 </p>
               </div>
 
-              {/* Video Section – manji padding na telefonu */}
               <div className={`transform transition-all duration-1000 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                 <div className="relative rounded-lg md:rounded-xl overflow-hidden shadow-2xl border border-violet-500/20 bg-gradient-to-br from-gray-900 to-gray-800 max-w-3xl mx-auto">
-                  {/* CTA bar – kompaktniji na telefonu */}
                   <div className="bg-gradient-to-r from-violet-600 to-violet-700 text-white py-1.5 md:py-2 px-4 md:px-6 text-center">
                     <p className="font-semibold text-xs md:text-sm flex items-center justify-center gap-2">
                       <Play className="w-3 h-3 md:w-3.5 md:h-3.5" />
                       {language === 'sr' ? 'Klikni Play Da Naučiš Više' : 'Click Play to Learn More'}
                     </p>
                   </div>
-
-                  {/* Video placeholder – manji play dugme na telefonu */}
                   <div className="aspect-video bg-gradient-to-br from-gray-800 via-gray-900 to-black flex items-center justify-center relative group cursor-pointer">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/20 to-black/40"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/20 to-black/40" />
                     <div className="relative z-10 text-center">
                       <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-violet-600 to-pink-600 flex items-center justify-center mb-2 md:mb-3 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg">
                         <Play className="w-6 h-6 md:w-10 md:h-10 text-white ml-0.5 md:ml-1" />
@@ -348,244 +279,24 @@ export function FunnelPage() {
                   </div>
                 </div>
               </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* Booking Section – bez negativnih margina, natural flow */}
-        <section id="booking-form" className="pt-12 md:pt-16 pb-16 md:pb-24 relative overflow-hidden z-10">
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-xl mx-auto text-center">
-              {/* Header van kartice - veći tekst, na sredinu */}
-              <p className="text-violet-400 text-sm font-medium tracking-wider uppercase mb-2">
-                {language === 'sr' ? 'Besplatna konsultacija' : 'Free consultation'}
-              </p>
-              <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-3">
-                {language === 'sr' ? (
-                  <>Kontaktiraj Nas <span className="text-violet-300">Odmah</span></>
-                ) : (
-                  <>Contact Us <span className="text-violet-300">Now</span></>
-                )}
-              </h2>
-              <p className="text-gray-500 text-sm md:text-base mb-6 max-w-lg mx-auto">
-                {language === 'sr' 
-                  ? 'Zakaži 1-na-1 poziv i saznaj kako možemo pomoći, plan strategije i prilike za rast.'
-                  : 'Book a 1-on-1 call and see how we can help, strategy plan and growth opportunities.'
-                }
-              </p>
-
-              {/* Card - kutija (samo forma) */}
-              <div className="rounded-2xl border border-gray-700/80 bg-gray-900/40 backdrop-blur-sm overflow-hidden shadow-xl">
-                <div className="p-8 md:p-10">
-                {submitSuccess ? (
-                  <div className="text-center py-8">
-                    <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle className="w-10 h-10 text-white" />
-                    </div>
-                    <h4 className="text-xl font-bold text-white mb-2">
-                      {language === 'sr' ? 'Uspešno Poslato!' : 'Successfully Sent!'}
-                    </h4>
-                    <p className="text-gray-400">
-                      {language === 'sr' ? 'Kontaktiraćemo vas uskoro.' : 'We will contact you soon.'}
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Name field */}
-                    <div>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all text-sm"
-                        placeholder={language === 'sr' ? 'Ime i prezime *' : 'Full name *'}
-                      />
-                    </div>
-
-                    {/* Phone field */}
-                    <div>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all text-sm"
-                        placeholder={language === 'sr' ? 'Broj telefona *' : 'Phone number *'}
-                      />
-                    </div>
-
-                    {/* Email field - shows after phone is entered */}
-                    {formData.phone && (
-                      <div className="animate-fadeIn">
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all text-sm"
-                          placeholder={language === 'sr' ? 'Email adresa *' : 'Email address *'}
-                        />
-                      </div>
-                    )}
-
-                    {/* Budget - radio krugovi, pojavljuje se nakon emaila */}
-                    {formData.email && (
-                      <div className="animate-fadeIn pt-2">
-                        <p className="text-white text-sm mb-4">
-                          {language === 'sr' ? 'Koliki je budžet projekta? (opciono)' : 'What is your project budget? (optional)'}
-                        </p>
-                        <div className="space-y-3">
-                          {[
-                            { value: '<500', label: '< €500' },
-                            { value: '500-1000', label: '€500 – €1,000' },
-                            { value: '1000-2500', label: '€1,000 – €2,500' },
-                            { value: '2500-5000', label: '€2,500 – €5,000' },
-                            { value: '5000+', label: '€5,000+' },
-                            { value: 'prefer-not-to-say', label: language === 'sr' ? 'Radije ne bih da kažem' : 'Prefer not to say' },
-                          ].map((opt) => {
-                            const isChecked = formData.message === opt.value;
-                            return (
-                              <label
-                                key={opt.value}
-                                className="flex items-center gap-3 cursor-pointer group"
-                              >
-                                <span className={`relative flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors ${isChecked ? 'border-violet-500' : 'border-gray-500 group-hover:border-gray-400'}`}>
-                                  {isChecked && (
-                                    <span className="h-2 w-2 rounded-full bg-violet-500" />
-                                  )}
-                                </span>
-                                <input
-                                  type="radio"
-                                  name="message"
-                                  value={opt.value}
-                                  checked={isChecked}
-                                  onChange={handleChange}
-                                  className="sr-only"
-                                />
-                                <span className="text-gray-300 text-sm group-hover:text-white transition-colors">{opt.label}</span>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Terms */}
-                    <p className="text-xs text-gray-500 leading-relaxed">
-                      {language === 'sr' 
-                        ? 'Unosom informacija, pristajete da vaši podaci budu sačuvani u skladu sa našom politikom privatnosti.'
-                        : 'By entering your information, you consent to your data being saved in accordance with our privacy policy.'
-                      }
-                    </p>
-
-                    {/* Submit button */}
-                    <button
-                      type="submit"
-                      disabled={isSubmitting || !formData.name || !formData.phone || !formData.email}
-                      className="w-full py-3.5 px-6 rounded-lg bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold hover:from-violet-400 hover:to-violet-500 transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed shadow-[0_4px_20px_rgba(139,92,246,0.5)] hover:shadow-[0_4px_28px_rgba(139,92,246,0.7)] text-sm"
-                    >
-                      {isSubmitting ? (
-                        <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
-                      ) : (
-                        <>
-                          {language === 'sr' ? 'Nastavi' : 'Continue'}
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
-                  </form>
-                )}
-                </div>
+              <div className={`mt-6 flex justify-center transform transition-all duration-1000 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                <button
+                  type="button"
+                  onClick={goToFunnel}
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase text-sm tracking-wide rounded-lg transition-colors shadow-[0_4px_14px_0_rgba(0,0,0,0.1),0_0_48px_rgba(139,92,246,0.65)]"
+                >
+                  {language === 'sr' ? 'Zakaži poziv' : 'Book a call'}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Case Study – svi projekti sa logotipima iz /images/ */}
-        <section id="case-study" ref={caseRef as React.RefObject<HTMLElement>} className="py-16 md:py-24 relative overflow-hidden z-10 bg-black">
-          <div className={`container mx-auto px-4 relative z-10 ${revealClass(caseVisible)}`}>
-            <div className="max-w-6xl mx-auto">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="w-2 h-8 rounded-full bg-violet-500 flex-shrink-0 mt-1" />
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-                    {language === 'sr' ? (
-                      <>Stvarni rezultati <span className="text-violet-300">od stvarnih klijenata.</span></>
-                    ) : (
-                      <>Real results <span className="text-violet-300">from real clients.</span></>
-                    )}
-                  </h2>
-                  <p className="text-gray-400 mt-3 text-base md:text-lg max-w-2xl">
-                    {language === 'sr' 
-                      ? 'Pogledaj kako su naši klijenti dobili moderan sajt, više poseta i jasnu online prisutnost.'
-                      : 'See how our clients got a modern site, more traffic, and a clear online presence.'
-                    }
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mt-10">
-                {[
-                  { id: 'prestige', logo: '/images/logop.png', siteImg: '/images/prestige.png', title: 'Prestige Gradnja', tag: language === 'sr' ? 'Nekretnine, gradnja' : 'Real estate, construction', headline: language === 'sr' ? 'Sajt za nekretnine i apartmane — projekti i kontakt' : 'Site for real estate and apartments — projects and contact', text: language === 'sr' ? 'Moderan izgled i jasna ponuda. Klijent zadovoljan.' : 'Modern look and clear offer. Client satisfied.' },
-                  { id: 'rc', logo: '/images/logo.png', siteImg: '/images/borakk.png', title: 'Custom RC Parts', tag: language === 'sr' ? 'E-commerce, RC delovi' : 'E-commerce, RC parts', headline: language === 'sr' ? 'Web prodavnica za RC delove — porudžbine i katalog' : 'Online store for RC parts — orders and catalog', text: language === 'sr' ? 'Funkcionalan shop sa kategorijama i plaćanjem. Rast prodaje preko sajta.' : 'Functional shop with categories and payment. Sales growth via site.' },
-                  { id: 'kralj', logo: '/images/Beli%20logo2.png', siteImg: '/images/kralj.png', title: 'Kralj Residence', tag: language === 'sr' ? 'apartmani i nekretnine' : 'Apartments & real estate', headline: language === 'sr' ? 'Moderan sajt za prodaju stanova - direktna prodaja' : 'Modern site for apartment sales — direct sales', text: language === 'sr' ? 'Responzivan sajt sa jasnom ponudom stanova. Zadovoljan klijent.' : 'Responsive site with clear property offer. Happy client.' },
-                  { id: 'bn', logo: '/images/logobn.png', siteImg: '/images/bn.png', title: 'BN Autofolije', tag: language === 'sr' ? 'Auto folije i detailing' : 'Car wraps & detailing', headline: language === 'sr' ? 'Web sajt za auto folije — više upita i preglednosti' : 'Website for car wraps — more inquiries and visibility', text: language === 'sr' ? 'Profesionalna prezentacija i galerija radova. Više upita.' : 'Professional presentation and portfolio. More inquiries.' },
-                  { id: 'poklon', logo: '/images/poklonilogo.png', siteImg: '/images/poklon.png', title: 'Pokloni Portret', tag: language === 'sr' ? 'Personalizovani pokloni' : 'Personalized gifts', headline: language === 'sr' ? 'Portreti po narudžbini — galerija i porudžbine' : 'Custom portraits — gallery and orders', text: language === 'sr' ? 'Umetnički brend na webu. Lako naručivanje i pregled radova.' : 'Art brand online. Easy ordering and portfolio view.' },
-                  { id: 'komotraks', logo: '/images/komotraks-logotip.png', siteImg: '/images/komotraks.png', title: 'Komotraks', tag: language === 'sr' ? 'Komarnici' : 'Screens & sliding doors', headline: language === 'sr' ? 'Profesionalan web sajt za komarnike i klizna vrata - jasna ponuda i kontakti' : 'Professional website for screens and sliding doors — clear offer and contacts', text: language === 'sr' ? 'Moderan sajt sa uslugama i flotom. Klijent zadovoljan preglednošću.' : 'Modern site with services and fleet. Client happy with clarity.' },
-                  { id: 'loki', logo: '/images/lokilo.png', siteImg: '/images/loki.png', title: 'Loki N-4', tag: language === 'sr' ? 'Betonski elementi' : 'Concrete elements', headline: language === 'sr' ? 'Prepoznatljiv brend na webu — identitet i poruka' : 'Recognizable brand online — identity and message', text: language === 'sr' ? 'Jedinstven vizuelni identitet i jasna komunikacija.' : 'Unique visual identity and clear communication.' },
-                  { id: 'bora', logo: '/images/boralogo.jpg', siteImg: '/images/bora.png', title: 'Boracompany', tag: language === 'sr' ? 'CNC obrada' : 'CNC machining', headline: language === 'sr' ? 'Korporativni sajt — profesionalna prezentacija usluga' : 'Corporate site — professional service presentation', text: language === 'sr' ? 'Jasna struktura i poruka brenda. Povećana kredibilitet.' : 'Clear structure and brand message. Increased credibility.' },
-                  { id: 'lako', logo: '/images/logolak.png', siteImg: '/images/lako.png', title: 'Lako Sistem', tag: language === 'sr' ? 'Papirna galanterija' : 'Paper goods', headline: language === 'sr' ? 'Moderan prezentacioni web sajt - preglednost i autoritet. Zadovoljstvo i rezultati.' : 'Modern presentation website — clarity and authority. Satisfaction and results.', text: language === 'sr' ? 'Sajt prilagođen potrebama klijenta. Zadovoljstvo i rezultati.' : 'Site tailored to client needs. Satisfaction and results.' },
-                  { id: 'panic', logo: '/images/logoin.png', siteImg: '/images/panic.png', title: 'IN-STAN', tag: language === 'sr' ? 'Stolarija' : 'Joinery', headline: language === 'sr' ? 'Moderan funkcionalan sajt za stolariju sa katalogom' : 'Modern functional website for joinery with catalog', text: language === 'sr' ? 'Profesionalan sajt koji predstavlja brend na internetu.' : 'Professional site that represents the brand online.' },
-                  { id: 'jastuci', logo: '/images/logo2.png', siteImg: '/images/jastuci.png', title: 'Vazdušni jastuci', tag: language === 'sr' ? 'Auto delovi' : 'Auto parts', headline: language === 'sr' ? 'Sajt za auto delove — katalog i upiti' : 'Site for auto parts — catalog and inquiries', text: language === 'sr' ? 'Pregledan katalog i kontakt forma. Više upita sa sajta.' : 'Clear catalog and contact form. More inquiries from site.' },
-                ].map((card) => (
-                  <div key={card.id} className="rounded-2xl border border-gray-700/60 bg-gray-900/60 backdrop-blur-sm overflow-hidden shadow-xl flex flex-col h-full">
-                    <div className="p-5 md:p-6 flex flex-col flex-1 min-h-0">
-                      <div className="flex-1 flex flex-col min-h-0">
-                        <div className="flex gap-0.5 mb-3">
-                          {[1,2,3,4,5].map((i) => (
-                            <Star key={i} className="w-4 h-4 text-violet-400 fill-violet-400" />
-                          ))}
-                        </div>
-                        <h3 className="text-violet-300 font-bold text-sm md:text-base mb-3 leading-snug">
-                          {card.headline}
-                        </h3>
-                        <div className="aspect-video rounded-lg bg-gray-800 border border-gray-700 mb-4 overflow-hidden">
-                          <img src={card.siteImg} alt={card.title} className="w-full h-full object-cover" />
-                        </div>
-                        <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                          {card.text}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-3 mt-auto flex-shrink-0">
-                        <div className={`w-24 h-14 md:w-28 md:h-16 rounded-lg border flex-shrink-0 overflow-hidden flex items-center justify-center p-1.5 ${['rc', 'bora', 'lako', 'panic'].includes(card.id) ? 'bg-white border-gray-300' : 'bg-gray-800 border-gray-700'}`}>
-                          <img src={card.logo} alt="" className="max-w-full max-h-full w-auto h-auto object-contain" />
-                        </div>
-                        <div>
-                          <p className="text-white font-medium text-sm">{card.title}</p>
-                          <p className="text-gray-500 text-xs">{card.tag}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Social proof / 50+ projekata – 1:1 layout kao referenca */}
+        {/* Success metrics */}
         <section id="success-metrics" ref={metricsRef as React.RefObject<HTMLElement>} className="py-16 md:py-24 relative overflow-hidden z-10">
           <div className={`container mx-auto px-4 relative z-10 ${revealClass(metricsVisible)}`}>
             <div className="max-w-4xl mx-auto text-center">
-              {/* Slika ljudi + tekst */}
               <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
                 <img src="/images/ljudi.webp" alt="" className="h-8 w-auto rounded-full object-cover" />
                 <p className="text-white text-sm md:text-base">
@@ -596,28 +307,20 @@ export function FunnelPage() {
                   )}
                 </p>
               </div>
-
-              {/* Naslovi */}
               <h2 className="text-2xl md:text-4xl font-bold text-white tracking-tight mb-2">
                 {language === 'sr' ? '50+ Uspešnih Projekata, Priče Uspeha.' : '50+ Successful Projects, Success Stories.'}
               </h2>
               <h3 className="text-xl md:text-2xl font-bold text-violet-400 mb-6">
                 {language === 'sr' ? 'Jedan Dokazan Pristup.' : 'One Proven Approach.'}
               </h3>
-
-              {/* Opis */}
               <p className="text-gray-400 text-base md:text-lg max-w-4xl mx-auto mb-10">
                 {language === 'sr'
                   ? 'Od korporativnih sajtova do e-commerce i landing stranica — znamo šta je potrebno da vaš biznis zasija na internetu. Bez nagađanja, bez zastoja.'
                   : 'From corporate sites to e-commerce and landing pages — we know what it takes to make your business shine online. No guesswork, no plateaus.'}
               </p>
-
-              {/* Centralna slika – donji deo prekriva stats ploča */}
               <div className="rounded-xl overflow-hidden border border-gray-700/60 shadow-2xl max-w-4xl mx-auto">
                 <img src="/images/filmska%207.jpg" alt={language === 'sr' ? 'Rad na projektu — AiSajt tim' : 'Project work — AiSajt team'} className="w-full h-auto object-cover" />
               </div>
-
-              {/* Statistike – preklapa dno slike, vizuelno spojeno */}
               <div ref={statsRef} className="relative z-10 -mt-14 md:-mt-16 rounded-2xl bg-gray-900/95 border border-gray-700/60 backdrop-blur-sm px-6 py-6 md:px-8 md:py-7 shadow-xl w-full">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                   <div className="text-center md:text-left">
@@ -638,8 +341,6 @@ export function FunnelPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Ikona na dnu */}
               <div className="mt-10 flex justify-center">
                 <div className="w-10 h-10 flex items-center justify-center text-violet-500">
                   <div className="w-6 h-6 border-2 border-violet-500 rotate-45" />
@@ -649,7 +350,7 @@ export function FunnelPage() {
           </div>
         </section>
 
-        {/* Meet the Team – 1:1 kopija, 3 člana */}
+        {/* Meet the Team */}
         <section id="meet-the-team" ref={teamRef as React.RefObject<HTMLElement>} className="py-16 md:py-24 relative overflow-hidden z-10 bg-black">
           <div className={`container mx-auto px-4 relative z-10 ${revealClass(teamVisible)}`}>
             <div className="max-w-5xl mx-auto text-center">
@@ -663,11 +364,7 @@ export function FunnelPage() {
                   : "Get to know the specialists who've helped many companies get a modern site and stronger online presence."}
               </p>
               <div className="w-3 h-3 bg-violet-500 rounded-sm mx-auto mb-12" />
-
-              {/* Mobile: Bogdan + Strahinja u gornjem redu, Marko dole u sredini */}
-              {/* Desktop (sm+): 3 kartice u redu */}
               <div className="max-w-4xl mx-auto">
-                {/* Gornji red – Bogdan i Strahinja */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-8 mb-4 md:mb-0">
                   {[
                     { name: 'Bogdan Gradjanin', role: language === 'sr' ? 'Suvlasnik, specijalizovani programer' : 'Co-owner & Specialized Developer', image: '/images/boban Izrada sajta .webp' },
@@ -675,32 +372,17 @@ export function FunnelPage() {
                   ].map((member) => (
                     <div key={member.name} className="rounded-2xl border border-gray-600/60 bg-gray-900/80 backdrop-blur-sm overflow-hidden shadow-xl flex flex-col">
                       <div className="aspect-square bg-gray-700/80 flex items-center justify-center text-4xl font-bold text-gray-500 overflow-hidden">
-                        {'image' in member && member.image ? (
-                          <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
-                        ) : (
-                          member.name.split(' ').map((n) => n[0]).join('')
-                        )}
+                        <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
                       </div>
                       <div className="p-4 sm:p-5">
                         <p className="font-bold text-sm sm:text-lg">
-                          {(() => {
-                            const parts = member.name.split(' ');
-                            const ime = parts[0];
-                            const prezime = parts.slice(1).join(' ');
-                            return (
-                              <>
-                                <span className="text-violet-400">{ime}</span>
-                                {prezime && <span className="text-white"> {prezime}</span>}
-                              </>
-                            );
-                          })()}
+                          <span className="text-violet-400">{member.name.split(' ')[0]}</span>
+                          <span className="text-white"> {member.name.split(' ').slice(1).join(' ')}</span>
                         </p>
                         <p className="text-gray-400 text-xs sm:text-sm mt-0.5">{member.role}</p>
                       </div>
                     </div>
                   ))}
-
-                  {/* Marko – isti izgled kao Bogdan i Strahinja */}
                   <div className="col-span-2 sm:col-span-1 rounded-2xl border border-gray-600/60 bg-gray-900/80 backdrop-blur-sm overflow-hidden shadow-xl flex flex-col max-w-[50%] sm:max-w-none mx-auto w-full">
                     <div className="aspect-square bg-gray-700/80 flex items-center justify-center text-4xl font-bold text-gray-500 overflow-hidden">
                       <img src="/images/Dedza SEO OPTIMIZACIJA.webp" alt="Marko Devedzic" className="w-full h-full object-cover object-top" />
@@ -716,24 +398,6 @@ export function FunnelPage() {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-12 flex flex-col items-center gap-4">
-                <p className="text-gray-500 text-sm flex items-center gap-2">
-                  <span>{language === 'sr' ? 'Odlično' : 'Excellent'}</span>
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} className="w-4 h-4 text-green-500 fill-green-500" />
-                  ))}
-                  <span className="text-gray-500">{language === 'sr' ? '50+ uspešnih projekata' : '50+ successful projects'}</span>
-                </p>
-                <button
-                  type="button"
-                  onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-violet-500 hover:bg-violet-600 text-white font-bold uppercase text-sm tracking-wide rounded-lg transition-colors shadow-[0_4px_14px_0_rgba(0,0,0,0.1),0_0_48px_rgba(139,92,246,0.65)]"
-                >
-                  {language === 'sr' ? 'Zakazi poziv' : 'Book a call'}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
               </div>
             </div>
           </div>
@@ -861,17 +525,14 @@ export function FunnelPage() {
           </div>
         </section>
 
-        {/* Završna CTA sekcija – 1:1 dizajn, violetno svetlo */}
+        {/* CTA final */}
         <section id="cta-final" ref={ctaRef as React.RefObject<HTMLElement>} className="py-16 md:py-24 bg-black relative z-10 -mt-1">
           <div className={`container mx-auto px-4 ${revealClass(ctaVisible)}`}>
             <div className="max-w-6xl mx-auto">
               <div className="relative rounded-3xl bg-gray-900/95 border border-gray-700/50 overflow-hidden">
-                {/* Svetlo u našim bojama – top-left i top-right */}
                 <div className="absolute -top-40 -left-40 w-[500px] h-[400px] bg-violet-600/25 rounded-full blur-[120px] pointer-events-none" />
                 <div className="absolute -top-32 -right-32 w-[400px] h-[350px] bg-violet-500/15 rounded-full blur-[100px] pointer-events-none" />
-
                 <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 p-8 md:p-10 lg:p-12">
-                  {/* Leva kolona – tekst */}
                   <div className="flex flex-col justify-center">
                     <div className="flex flex-col items-start gap-3 mb-6">
                       <p className="text-white text-sm md:text-base">
@@ -890,21 +551,13 @@ export function FunnelPage() {
                     <p className="text-gray-400 text-sm leading-snug mb-3 md:leading-relaxed md:text-base md:mb-6 max-w-xl">
                       {language === 'sr' ? (
                         <>Potrebno je 30 sekundi da se{' '}
-                          <button
-                            type="button"
-                            onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="text-violet-300 font-bold hover:text-violet-200 underline underline-offset-2 cursor-pointer"
-                          >
+                          <button type="button" onClick={goToFunnel} className="text-violet-300 font-bold hover:text-violet-200 underline underline-offset-2 cursor-pointer">
                             prijavite
                           </button>
                           {' '}i proverimo da li AiSajt može da vam pomogne da brže rastete — sa jasnoćom i rezultatima.</>
                       ) : (
                         <>Take 30 seconds to{' '}
-                          <button
-                            type="button"
-                            onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="text-violet-300 font-bold hover:text-violet-200 underline underline-offset-2 cursor-pointer"
-                          >
+                          <button type="button" onClick={goToFunnel} className="text-violet-300 font-bold hover:text-violet-200 underline underline-offset-2 cursor-pointer">
                             apply now
                           </button>
                           {' '}and let's see if AiSajt is the right fit to help you scale faster—with clarity and results.</>
@@ -930,26 +583,23 @@ export function FunnelPage() {
                       {language === 'sr' ? (
                         <>Kontaktiraćemo vas i na pozivu ćete dobiti <strong className="text-white">konkretan savet i jasne sledeće korake</strong> za vaš biznis. Bez obaveze — fokus je na vašem uspehu.</>
                       ) : (
-                        <>We’ll contact you and on the call you’ll get <strong className="text-white">concrete advice and clear next steps</strong> for your business. No obligation — the focus is on your success.</>
+                        <>We'll contact you and on the call you'll get <strong className="text-white">concrete advice and clear next steps</strong> for your business. No obligation — the focus is on your success.</>
                       )}
                     </p>
                   </div>
-
-                  {/* Desna kolona – samo glavna slika, centrirana */}
                   <div className="relative flex items-center justify-center w-full max-w-md">
                     <div className="rounded-2xl overflow-hidden border border-gray-700/60 shadow-2xl bg-gray-800/50 w-full max-h-[280px] md:max-h-[340px] flex items-center justify-center">
                       <img src="/images/filmska.jpg" alt="" className="w-full h-full object-contain" />
                     </div>
                   </div>
                 </div>
-                {/* Dugme centrirano ispod sadržaja */}
                 <div className="relative flex justify-center pb-8 md:pb-10">
                   <button
                     type="button"
-                    onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={goToFunnel}
                     className="inline-flex items-center gap-2 px-10 py-4 bg-white hover:bg-gray-100 text-gray-900 font-bold uppercase text-sm tracking-wide rounded-xl transition-colors shadow-[0_4px_14px_0_rgba(0,0,0,0.08),0_0_48px_rgba(255,255,255,0.55)]"
                   >
-                    {language === 'sr' ? 'Zakazi poziv' : 'Book a call'}
+                    {language === 'sr' ? 'Zakaži poziv' : 'Book a call'}
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -958,23 +608,16 @@ export function FunnelPage() {
           </div>
         </section>
 
-        {/* Mini footer – disclaimer i linkovi */}
         <footer className="bg-black border-t border-gray-800 py-8 md:py-10 relative z-10">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <div className="flex justify-center mb-5">
-                <img
-                  src="/images/aisajt_providno-removebg-preview.png"
-                  alt="AiSajt Logo"
-                  className="h-8 md:h-10 w-auto opacity-85"
-                />
+                <img src="/images/aisajt_providno-removebg-preview.png" alt="AiSajt Logo" className="h-8 md:h-10 w-auto opacity-85" />
               </div>
               <p className="text-gray-500 text-xs leading-relaxed mb-6">
-                {language === 'sr' ? (
-                  'Rezultati zavise od vrste projekta i saradnje. Prikazani projekti su stvarni radovi naših klijenata. Svaki biznis je drugačiji — uspeh na webu zavisi od vaših ciljeva, potreba i angažmana. Nismo povezani ni sa jednom trećom stranom navedenom na sajtu.'
-                ) : (
-                  'Results depend on project type and collaboration. Projects shown are real work for our clients. Every business is different — online success depends on your goals, needs, and commitment. We are not affiliated with any third parties mentioned on this site.'
-                )}
+                {language === 'sr'
+                  ? 'Rezultati zavise od vrste projekta i saradnje. Prikazani projekti su stvarni radovi naših klijenata. Svaki biznis je drugačiji — uspeh na webu zavisi od vaših ciljeva, potreba i angažmana. Nismo povezani ni sa jednom trećom stranom navedenom na sajtu.'
+                  : 'Results depend on project type and collaboration. Projects shown are real work for our clients. Every business is different — online success depends on your goals, needs, and commitment. We are not affiliated with any third parties mentioned on this site.'}
               </p>
               <p className="text-gray-500 text-xs">
                 © {new Date().getFullYear()} AiSajt
@@ -989,7 +632,7 @@ export function FunnelPage() {
           </div>
         </footer>
 
-        {/* ── Sticky Bottom Bar ────────────────────────────────────────── */}
+        {/* Sticky bottom bar → funnel */}
         <div
           className={`fixed bottom-5 left-0 right-0 z-40 hidden md:flex justify-center px-4 transition-all duration-500 ease-out ${
             stickyBarVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0 pointer-events-none'
@@ -1004,7 +647,7 @@ export function FunnelPage() {
               )}
             </p>
             <button
-              onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={goToFunnel}
               className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 md:px-5 md:py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-[0_0_16px_rgba(139,92,246,0.45)] hover:shadow-[0_0_24px_rgba(139,92,246,0.65)] whitespace-nowrap"
             >
               {language === 'sr' ? 'Zakaži Poziv' : 'Book a Call'}
@@ -1014,29 +657,19 @@ export function FunnelPage() {
             </button>
           </div>
         </div>
-        {/* ─────────────────────────────────────────────────────────────── */}
 
-        {/* ── Floating Book-a-Call Widget ──────────────────────────────── */}
+        {/* Floating widget → funnel */}
         <div className="fixed bottom-6 right-5 z-50 flex flex-col items-end gap-3">
-
-          {/* Popup card */}
           <div
             className={`transition-all duration-300 ease-out origin-bottom-right ${
-              widgetOpen
-                ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
-                : 'opacity-0 scale-90 translate-y-4 pointer-events-none'
+              widgetOpen ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' : 'opacity-0 scale-90 translate-y-4 pointer-events-none'
             }`}
           >
             <div className="w-80 rounded-2xl bg-[#1a1a1a] border border-white/10 shadow-2xl overflow-hidden">
-              {/* Header */}
               <div className="px-4 pt-4 pb-3 flex items-start gap-3">
                 <div className="relative flex-shrink-0">
                   <div className="w-10 h-10 rounded-full overflow-hidden">
-                    <img
-                      src="/images/Strahinja izrada sajta.webp"
-                      alt="Strahinja Zekanovic"
-                      className="w-full h-full object-cover object-top"
-                    />
+                    <img src="/images/Strahinja izrada sajta.webp" alt="Strahinja Zekanovic" className="w-full h-full object-cover object-top" />
                   </div>
                   <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-[#1a1a1a]" />
                 </div>
@@ -1044,36 +677,20 @@ export function FunnelPage() {
                   <p className="text-white font-semibold text-sm leading-tight">AiSajt Tim</p>
                   <p className="text-gray-400 text-xs">Strahinja Zekanović · Co-founder</p>
                 </div>
-                <button
-                  onClick={() => setWidgetOpen(false)}
-                  className="text-gray-500 hover:text-gray-300 transition-colors mt-0.5 flex-shrink-0"
-                  aria-label="Zatvori"
-                >
+                <button onClick={() => setWidgetOpen(false)} className="text-gray-500 hover:text-gray-300 transition-colors mt-0.5 flex-shrink-0" aria-label="Zatvori">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
-
-              {/* Title */}
               <div className="px-4 pb-3 border-b border-white/8">
-                <p className="text-white font-bold text-sm">
-                  {language === 'sr' ? 'AiSajt Strategijski Poziv' : 'AiSajt Strategy Call'}
-                </p>
-                <p className="text-gray-400 text-xs mt-0.5">
-                  {language === 'sr' ? 'Zakaži besplatni 1-1 poziv sa timom.' : 'Book your free 1-1 call with the team.'}
-                </p>
+                <p className="text-white font-bold text-sm">{language === 'sr' ? 'AiSajt Strategijski Poziv' : 'AiSajt Strategy Call'}</p>
+                <p className="text-gray-400 text-xs mt-0.5">{language === 'sr' ? 'Zakaži besplatni 1-1 poziv sa timom.' : 'Book your free 1-1 call with the team.'}</p>
               </div>
-
-              {/* Urgency */}
               <div className="mx-4 mt-3 px-3 py-2 bg-white/5 rounded-lg flex items-center justify-between">
-                <p className="text-gray-300 text-xs font-medium">
-                  {language === 'sr' ? 'Malo slobodnih termina.' : 'Only few slots left.'}
-                </p>
+                <p className="text-gray-300 text-xs font-medium">{language === 'sr' ? 'Malo slobodnih termina.' : 'Only few slots left.'}</p>
                 <span className="text-violet-400 font-bold text-xs tabular-nums">⚡ {language === 'sr' ? 'Ograničeno' : 'Limited'}</span>
               </div>
-
-              {/* Day picker */}
               <div className="px-4 pt-3 pb-1">
                 <div className="flex gap-1.5">
                   {dayLabels.map((label, i) => (
@@ -1081,9 +698,7 @@ export function FunnelPage() {
                       key={i}
                       onClick={() => setSelectedDay(i)}
                       className={`flex-1 flex flex-col items-center py-2.5 rounded-lg border text-xs font-medium transition-all ${
-                        selectedDay === i
-                          ? 'bg-violet-600 border-violet-500 text-white'
-                          : 'bg-white/5 border-white/10 text-gray-400 hover:border-violet-500/50 hover:text-white'
+                        selectedDay === i ? 'bg-violet-600 border-violet-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:border-violet-500/50 hover:text-white'
                       }`}
                     >
                       <span className="text-[9px] uppercase tracking-wide leading-tight">{label}</span>
@@ -1091,16 +706,9 @@ export function FunnelPage() {
                   ))}
                 </div>
               </div>
-
-              {/* CTA button */}
               <div className="px-4 py-4">
                 <button
-                  onClick={() => {
-                    setWidgetOpen(false);
-                    setTimeout(() => {
-                      document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 150);
-                  }}
+                  onClick={goToFunnel}
                   className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-500 hover:to-violet-600 text-white font-bold text-sm transition-all shadow-lg hover:shadow-violet-500/30"
                 >
                   {language === 'sr' ? 'Zakaži Poziv' : 'Book a Call'}
@@ -1108,24 +716,15 @@ export function FunnelPage() {
               </div>
             </div>
           </div>
-
-          {/* Toggle bubble */}
           <button
             onClick={() => setWidgetOpen(v => !v)}
             className="relative w-14 h-14 rounded-full shadow-2xl border-2 border-violet-500 hover:border-violet-400 transition-all hover:scale-105 active:scale-95 bg-violet-700 flex items-center justify-center"
             aria-label="Zakaži poziv"
           >
-            <img
-              src="/images/aisajt_providno-removebg-preview.png"
-              alt="AiSajt"
-              className="w-9 h-9 object-contain"
-            />
-            {/* Green dot */}
+            <img src="/images/aisajt_providno-removebg-preview.png" alt="AiSajt" className="w-9 h-9 object-contain" />
             <span className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-gray-950" />
           </button>
         </div>
-        {/* ─────────────────────────────────────────────────────────────── */}
-
       </main>
     </div>
   );

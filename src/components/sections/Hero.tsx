@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Send, ArrowRight, ExternalLink } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Language } from '../../types/language';
 import { navigateToSection } from '../../utils/navigation';
 
@@ -116,15 +116,15 @@ export function Hero({ language }: HeroProps) {
 
             {/* Buttons - PopArt Style */}
             <div className={`flex flex-wrap gap-4 transform transition-all duration-1000 delay-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <button
-                onClick={() => navigate('/contact')}
+              <Link
+                to="/funnel"
                 className="group relative px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-white hover:text-gray-900 border-2 border-gray-900 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-2xl overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/20 to-violet-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
                 <Send className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                 <span className="relative z-10">{language === 'sr' ? 'BESPLATNE KONSULTACIJE' : 'FREE CONSULTATION'}</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300 relative z-10" />
-              </button>
+              </Link>
               
               <button
                 onClick={() => navigateToSection('portfolio', navigate, location.pathname)}

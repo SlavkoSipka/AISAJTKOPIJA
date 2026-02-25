@@ -410,7 +410,7 @@ export function FAQPage() {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => navigate('/contact')}
+                onClick={() => navigate('/funnel')}
                 className="group px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2"
               >
                 <Mail className="w-5 h-5" />

@@ -91,7 +91,7 @@ export async function submitToHubSpot(
 }
 
 /**
- * Submit contact form (ContactPage + Home Contact section)
+ * Submit contact form (Funnel page + Home Contact section)
  */
 export async function submitContactForm(data: {
   name: string;

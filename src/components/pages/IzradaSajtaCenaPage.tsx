@@ -130,7 +130,7 @@ export function IzradaSajtaCenaPage() {
                   <button
                     onClick={() => {
                       trackCTAClick('Besplatna Konsultacija - Hero', 'izrada_sajta_hero', language);
-                      navigate('/contact');
+                      navigate('/funnel');
                     }}
                     className="group px-6 py-3.5 sm:px-7 sm:py-4 md:px-8 md:py-4 bg-gray-900 text-white text-base sm:text-lg font-semibold rounded-full hover:bg-white hover:text-gray-900 border-2 border-gray-900 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl"
                   >
@@ -318,7 +318,7 @@ export function IzradaSajtaCenaPage() {
                     <button
                       onClick={() => {
                         trackCTAClick('Jednostavan Sajt - Pricing', 'pricing_simple', language);
-                        navigate('/contact');
+                        navigate('/funnel');
                       }}
                       className="w-full py-2 bg-gradient-to-r from-violet-500 to-indigo-600 text-white rounded-lg text-sm font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                     >
@@ -379,7 +379,7 @@ export function IzradaSajtaCenaPage() {
                     <button
                       onClick={() => {
                         trackCTAClick('Online Prodavnica - Pricing', 'pricing_shop', language);
-                        navigate('/contact');
+                        navigate('/funnel');
                       }}
                       className="w-full py-2 bg-gradient-to-r from-indigo-500 to-pink-600 text-white rounded-lg text-sm font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                     >
@@ -438,7 +438,7 @@ export function IzradaSajtaCenaPage() {
                     <button
                       onClick={() => {
                         trackCTAClick('Složeni Sajt - Pricing', 'pricing_complex', language);
-                        navigate('/contact');
+                        navigate('/funnel');
                       }}
                       className="w-full py-2 bg-gradient-to-r from-pink-500 to-violet-600 text-white rounded-lg text-sm font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                     >
@@ -500,7 +500,7 @@ export function IzradaSajtaCenaPage() {
                         <button
                           onClick={() => {
                             trackCTAClick('Projekat - Pricing', 'pricing_complex_premium', language);
-                            navigate('/contact');
+                            navigate('/funnel');
                           }}
                           className="w-full md:w-auto px-8 py-4 bg-gray-900 text-white rounded-xl font-semibold hover:bg-violet-600 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
                         >
@@ -819,7 +819,7 @@ export function IzradaSajtaCenaPage() {
                 <button
                   onClick={() => {
                     trackCTAClick('Kompletno Rešenje - CTA', 'complete_solution', language);
-                    navigate('/contact');
+                    navigate('/funnel');
                   }}
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg"
                 >
@@ -1410,7 +1410,7 @@ export function IzradaSajtaCenaPage() {
                 <button
                   onClick={() => {
                     trackCTAClick('Final CTA', 'izrada_sajta_final', language);
-                    navigate('/contact');
+                    navigate('/funnel');
                   }}
                   className="group px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 inline-flex items-center gap-2 shadow-xl"
                 >

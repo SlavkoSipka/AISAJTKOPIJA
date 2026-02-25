@@ -98,7 +98,7 @@ export function WebShopPage() {
                   <button
                     onClick={() => {
                       trackCTAClick('Besplatna Konsultacija - Hero Web Shop', 'web_shop_hero', language);
-                      navigate('/contact');
+                      navigate('/funnel');
                     }}
                     className="group px-6 py-3.5 sm:px-7 sm:py-4 md:px-8 md:py-4 bg-gray-900 text-white text-base sm:text-lg font-semibold rounded-full hover:bg-white hover:text-gray-900 border-2 border-gray-900 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl"
                   >
@@ -296,7 +296,7 @@ export function WebShopPage() {
                   <button
                     onClick={() => {
                       trackCTAClick('Basic Shop - Pricing', 'pricing_basic_shop', language);
-                      navigate('/contact');
+                      navigate('/funnel');
                     }}
                     className="w-full py-3 bg-gradient-to-r from-violet-500 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                   >
@@ -345,7 +345,7 @@ export function WebShopPage() {
                   <button
                     onClick={() => {
                       trackCTAClick('Advanced Shop - Pricing', 'pricing_advanced_shop', language);
-                      navigate('/contact');
+                      navigate('/funnel');
                     }}
                     className="w-full py-3 bg-gradient-to-r from-indigo-500 to-pink-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                   >
@@ -391,7 +391,7 @@ export function WebShopPage() {
                   <button
                     onClick={() => {
                       trackCTAClick('Enterprise Shop - Pricing', 'pricing_enterprise_shop', language);
-                      navigate('/contact');
+                      navigate('/funnel');
                     }}
                     className="w-full py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                   >
@@ -1016,7 +1016,7 @@ export function WebShopPage() {
                 <button
                   onClick={() => {
                     trackCTAClick('Besplatna Konsultacija - Footer Web Shop', 'web_shop_cta', language);
-                    navigate('/contact');
+                    navigate('/funnel');
                   }}
                   className="group px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 inline-flex items-center gap-2 shadow-xl"
                 >

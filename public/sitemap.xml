@@ -99,12 +99,12 @@
     <priority>0.75</priority>
   </url>
   
-  <!-- Contact & Resources Pages -->
+  <!-- Funnel - MONEY PAGE / primary conversion (high authority from all pages) -->
   <url>
-    <loc>https://aisajt.com/contact</loc>
-    <lastmod>2026-01-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://aisajt.com/funnel</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
   </url>
   
   <url>

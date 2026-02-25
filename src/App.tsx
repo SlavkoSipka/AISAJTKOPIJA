@@ -7,7 +7,6 @@ import { WebDizajnPage } from './components/pages/WebDizajnPage';
 import { WebShopPage } from './components/pages/WebShopPage';
 import { TermsPage } from './components/pages/TermsPage';
 import { PrivacyPage } from './components/pages/PrivacyPage';
-import { ContactPage } from './components/pages/ContactPage';
 import { ThankYouPage } from './components/pages/ThankYouPage';
 import { ResourcesPage } from './components/pages/ResourcesPage';
 import { QuizPage } from './components/pages/QuizPage';
@@ -17,6 +16,8 @@ import { FunnelPage } from './components/pages/FunnelPage';
 import { BlogHubPage } from './components/pages/BlogHubPage';
 import { BlogPostPage } from './components/pages/BlogPostPage';
 import { BlogCategoryPage } from './components/pages/BlogCategoryPage';
+import { IzradaSajtaDetaljiPage } from './components/pages/IzradaSajtaDetaljiPage';
+import { SEOOdrzavanjeDetaljiPage } from './components/pages/SEOOdrzavanjeDetaljiPage';
 import { LoadingScreen } from './components/ui/LoadingScreen';
 import { ExitIntentPopup } from './components/ui/ExitIntentPopup';
 
@@ -59,18 +60,20 @@ function AppContent() {
         <Route path="/seo-optimizacija-cena" element={<SEOPage />} />
         <Route path="/seo" element={<SEOPage />} /> {/* Redirect old URL */}
         <Route path="/izrada-sajta-cena" element={<IzradaSajtaCenaPage />} />
+        <Route path="/izrada-sajta-detalji" element={<IzradaSajtaDetaljiPage />} />
+        <Route path="/seo-optimizacija-detalji" element={<SEOOdrzavanjeDetaljiPage />} />
         <Route path="/izrada-web-shopa" element={<WebShopPage />} />
         <Route path="/web-dizajn" element={<WebDizajnPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/contact" element={<FunnelPage />} />
+        <Route path="/funnel" element={<FunnelPage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/resources/quiz" element={<QuizPage />} />
         <Route path="/resources/audit" element={<AuditFormPage />} />
         <Route path="/resources/guide" element={<LeadMagnetDownloadPage />} />
         <Route path="/resources/checklist" element={<LeadMagnetDownloadPage />} />
-        <Route path="/funnel" element={<FunnelPage />} />
         {/* Blog Routes */}
         <Route path="/blog" element={<BlogHubPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />

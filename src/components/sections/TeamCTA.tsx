@@ -1,23 +1,22 @@
 import { Users, Sparkles, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../hooks/useLanguage';
 import { trackCTAClick } from '../../utils/analytics';
 
 export function TeamCTA() {
-  const navigate = useNavigate();
   const { language } = useLanguage();
 
   const handleClick = () => {
-    trackCTAClick('Upoznaj AiSajt Tim', '/', language);
-    navigate('/');
+    trackCTAClick('Upoznaj AiSajt Tim', '/funnel', language);
   };
 
   return (
     <div className="mt-8 md:mt-12">
       <div className="max-w-3xl mx-auto">
-          <button
+          <Link
+            to="/funnel"
             onClick={handleClick}
-            className="group relative w-full bg-gradient-to-br from-white to-violet-50/30 hover:to-violet-50/50 rounded-xl p-6 md:p-7 border border-violet-200/60 hover:border-violet-300 transition-all duration-300 hover:shadow-lg text-left overflow-hidden"
+            className="group relative w-full block bg-gradient-to-br from-white to-violet-50/30 hover:to-violet-50/50 rounded-xl p-6 md:p-7 border border-violet-200/60 hover:border-violet-300 transition-all duration-300 hover:shadow-lg text-left overflow-hidden"
           >
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-violet-400/5 to-indigo-400/5 rounded-full blur-xl group-hover:scale-125 transition-transform duration-500"></div>
@@ -46,7 +45,7 @@ export function TeamCTA() {
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
-          </button>
+          </Link>
         </div>
     </div>
   );

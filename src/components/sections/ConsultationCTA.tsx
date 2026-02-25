@@ -1,5 +1,5 @@
 import { MessageCircle, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../hooks/useLanguage';
 import { trackCTAClick } from '../../utils/analytics';
 
@@ -8,20 +8,19 @@ interface ConsultationCTAProps {
 }
 
 export function ConsultationCTA({ topic = "tvom projektu" }: ConsultationCTAProps) {
-  const navigate = useNavigate();
   const { language } = useLanguage();
 
   const handleClick = () => {
-    trackCTAClick('Besplatna Konsultacija', '/contact', language);
-    navigate('/contact');
+    trackCTAClick('Besplatna Konsultacija', '/funnel', language);
   };
 
   return (
     <div className="mt-8 md:mt-12">
       <div className="max-w-3xl mx-auto">
-          <button
+          <Link
+            to="/funnel"
             onClick={handleClick}
-            className="group relative w-full bg-gradient-to-br from-violet-600 to-indigo-700 hover:from-violet-700 hover:to-indigo-800 rounded-xl p-6 md:p-7 border border-violet-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/30 text-left overflow-hidden"
+            className="group relative w-full block bg-gradient-to-br from-violet-600 to-indigo-700 hover:from-violet-700 hover:to-indigo-800 rounded-xl p-6 md:p-7 border border-violet-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/30 text-left overflow-hidden"
           >
             {/* Animated background glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-violet-400/10 to-indigo-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -55,7 +54,7 @@ export function ConsultationCTA({ topic = "tvom projektu" }: ConsultationCTAProp
 
             {/* Pulse effect */}
             <div className="absolute inset-0 rounded-xl border border-white/20 opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
-          </button>
+          </Link>
         </div>
       </div>
   );

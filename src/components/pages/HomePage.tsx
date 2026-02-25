@@ -265,7 +265,7 @@ export function HomePage() {
                 <button
                   onClick={() => {
                     trackCTAClick('Zakažite Besplatnu Konsultaciju', 'video_section', language);
-                    navigate('/contact');
+                    navigate('/funnel');
                   }}
                   className="group px-8 py-3.5 border-2 border-gray-900 text-gray-900 font-semibold rounded-full hover:bg-gray-900 hover:text-white transition-all duration-300 inline-flex items-center gap-2"
                 >

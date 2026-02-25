@@ -144,7 +144,7 @@ export function SEOPage() {
                   <button
                     onClick={() => {
                       trackCTAClick('Besplatna SEO Analiza', 'seo_hero', language);
-                      navigate('/contact');
+                      navigate('/funnel');
                     }}
                     className="group px-6 py-3.5 sm:px-7 sm:py-4 md:px-8 md:py-4 bg-gray-900 text-white text-base sm:text-lg font-semibold rounded-full hover:bg-white hover:text-gray-900 border-2 border-gray-900 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl"
                   >
@@ -487,7 +487,7 @@ export function SEOPage() {
                         <button
                           onClick={() => {
                             trackCTAClick('Basic SEO Paket - Pricing', 'pricing_basic_seo', language);
-                            navigate('/contact');
+                            navigate('/funnel');
                           }}
                           className="w-full py-3 bg-gradient-to-r from-violet-500 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                         >
@@ -531,7 +531,7 @@ export function SEOPage() {
                         <button
                           onClick={() => {
                             trackCTAClick('Advanced SEO Paket - Pricing', 'pricing_advanced_seo', language);
-                            navigate('/contact');
+                            navigate('/funnel');
                           }}
                           className="w-full py-3 bg-gradient-to-r from-indigo-500 to-pink-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
                         >
@@ -928,7 +928,7 @@ export function SEOPage() {
                 <button
                   onClick={() => {
                     trackCTAClick('Kompletna SEO Strategija - CTA', 'seo_complete_strategy', language);
-                    navigate('/contact');
+                    navigate('/funnel');
                   }}
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg"
                 >
@@ -1499,7 +1499,7 @@ export function SEOPage() {
                 <button
                   onClick={() => {
                     trackCTAClick('Besplatna SEO Analiza - Footer', 'seo_cta', language);
-                    navigate('/contact');
+                    navigate('/funnel');
                   }}
                   className="group px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 inline-flex items-center gap-2 shadow-xl"
                 >

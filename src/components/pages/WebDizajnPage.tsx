@@ -102,7 +102,7 @@ export function WebDizajnPage() {
                   <button
                     onClick={() => {
                       trackCTAClick('Besplatna Web Dizajn Konsultacija', 'web_dizajn_hero', language);
-                      navigate('/contact');
+                      navigate('/funnel');
                     }}
                     className="group px-6 py-3.5 sm:px-7 sm:py-4 md:px-8 md:py-4 bg-gray-900 text-white text-base sm:text-lg font-semibold rounded-full hover:bg-white hover:text-gray-900 border-2 border-gray-900 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl"
                   >
@@ -1334,7 +1334,7 @@ export function WebDizajnPage() {
                 <button
                   onClick={() => {
                     trackCTAClick('Besplatna Web Dizajn Konsultacija - Footer', 'web_dizajn_cta', language);
-                    navigate('/contact');
+                    navigate('/funnel');
                   }}
                   className="group px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 inline-flex items-center gap-2 shadow-xl"
                 >
@@ -1384,7 +1384,7 @@ export function WebDizajnPage() {
                   {language === 'sr' ? 'SEO Optimizacija Cena' : 'SEO Optimization Price'}
                 </Link>
                 <Link 
-                  to="/contact"
+                  to="/funnel"
                   className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-700 hover:border-pink-500 hover:text-pink-600 transition-colors text-sm font-medium"
                 >
                   {language === 'sr' ? 'Kontakt - Besplatna Konsultacija' : 'Contact - Free Consultation'}

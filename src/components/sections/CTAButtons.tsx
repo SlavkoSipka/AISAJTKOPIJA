@@ -1,20 +1,17 @@
 import { Users, MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../hooks/useLanguage';
 import { trackCTAClick } from '../../utils/analytics';
 
 export function CTAButtons() {
-  const navigate = useNavigate();
   const { language } = useLanguage();
 
   const handleTeamClick = () => {
-    trackCTAClick('Upoznaj AiSajt Tim', '/', language);
-    navigate('/');
+    trackCTAClick('Upoznaj AiSajt Tim', '/funnel', language);
   };
 
   const handleConsultationClick = () => {
-    trackCTAClick('Besplatna Konsultacija', '/contact', language);
-    navigate('/contact');
+    trackCTAClick('Besplatna Konsultacija', '/funnel', language);
   };
 
   return (
@@ -25,9 +22,10 @@ export function CTAButtons() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Dugme 1 - Upoznaj Tim */}
-            <button
+            <Link
+              to="/funnel"
               onClick={handleTeamClick}
-              className="group relative bg-white hover:bg-gradient-to-br hover:from-violet-50 hover:to-indigo-50 rounded-2xl p-6 md:p-8 border-2 border-violet-200 hover:border-violet-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-left overflow-hidden"
+              className="group relative block bg-white hover:bg-gradient-to-br hover:from-violet-50 hover:to-indigo-50 rounded-2xl p-6 md:p-8 border-2 border-violet-200 hover:border-violet-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-left overflow-hidden"
             >
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-violet-400/10 to-indigo-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
@@ -56,12 +54,13 @@ export function CTAButtons() {
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
-            </button>
+            </Link>
 
             {/* Dugme 2 - Besplatna Konsultacija */}
-            <button
+            <Link
+              to="/funnel"
               onClick={handleConsultationClick}
-              className="group relative bg-gradient-to-br from-violet-600 to-indigo-700 hover:from-violet-700 hover:to-indigo-800 rounded-2xl p-6 md:p-8 border-2 border-violet-600 transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/50 hover:-translate-y-1 text-left overflow-hidden"
+              className="group relative block bg-gradient-to-br from-violet-600 to-indigo-700 hover:from-violet-700 hover:to-indigo-800 rounded-2xl p-6 md:p-8 border-2 border-violet-600 transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/50 hover:-translate-y-1 text-left overflow-hidden"
             >
               {/* Animated background glow */}
               <div className="absolute inset-0 bg-gradient-to-r from-violet-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -95,7 +94,7 @@ export function CTAButtons() {
 
               {/* Pulse effect */}
               <div className="absolute inset-0 rounded-2xl border-2 border-white/30 animate-pulse opacity-0 group-hover:opacity-100"></div>
-            </button>
+            </Link>
 
           </div>
         </div>
