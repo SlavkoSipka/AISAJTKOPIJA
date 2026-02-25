@@ -534,19 +534,22 @@ export function FunnelPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mt-10">
                 {[
-                  { id: 'prestige', logo: '/images/logop.png', siteImg: '/images/prestige.png', title: 'Prestige Gradnja', tag: language === 'sr' ? 'Nekretnine, gradnja' : 'Real estate, construction', headline: language === 'sr' ? 'Sajt za nekretnine i apartmane — projekti i kontakt' : 'Site for real estate and apartments — projects and contact', text: language === 'sr' ? 'Moderan izgled i jasna ponuda. Klijent zadovoljan.' : 'Modern look and clear offer. Client satisfied.' },
-                  { id: 'rc', logo: '/images/logo.png', siteImg: '/images/borakk.png', title: 'Custom RC Parts', tag: language === 'sr' ? 'E-commerce, RC delovi' : 'E-commerce, RC parts', headline: language === 'sr' ? 'Web prodavnica za RC delove — porudžbine i katalog' : 'Online store for RC parts — orders and catalog', text: language === 'sr' ? 'Funkcionalan shop sa kategorijama i plaćanjem. Rast prodaje preko sajta.' : 'Functional shop with categories and payment. Sales growth via site.' },
-                  { id: 'kralj', logo: '/images/Beli%20logo2.png', siteImg: '/images/kralj.png', title: 'Kralj Residence', tag: language === 'sr' ? 'apartmani i nekretnine' : 'Apartments & real estate', headline: language === 'sr' ? 'Moderan sajt za prodaju stanova - direktna prodaja' : 'Modern site for apartment sales — direct sales', text: language === 'sr' ? 'Responzivan sajt sa jasnom ponudom stanova. Zadovoljan klijent.' : 'Responsive site with clear property offer. Happy client.' },
-                  { id: 'bn', logo: '/images/logobn.png', siteImg: '/images/bn.png', title: 'BN Autofolije', tag: language === 'sr' ? 'Auto folije i detailing' : 'Car wraps & detailing', headline: language === 'sr' ? 'Web sajt za auto folije — više upita i preglednosti' : 'Website for car wraps — more inquiries and visibility', text: language === 'sr' ? 'Profesionalna prezentacija i galerija radova. Više upita.' : 'Professional presentation and portfolio. More inquiries.' },
-                  { id: 'poklon', logo: '/images/poklonilogo.png', siteImg: '/images/poklon.png', title: 'Pokloni Portret', tag: language === 'sr' ? 'Personalizovani pokloni' : 'Personalized gifts', headline: language === 'sr' ? 'Portreti po narudžbini — galerija i porudžbine' : 'Custom portraits — gallery and orders', text: language === 'sr' ? 'Umetnički brend na webu. Lako naručivanje i pregled radova.' : 'Art brand online. Easy ordering and portfolio view.' },
-                  { id: 'komotraks', logo: '/images/komotraks-logotip.png', siteImg: '/images/komotraks.png', title: 'Komotraks', tag: language === 'sr' ? 'Komarnici' : 'Screens & sliding doors', headline: language === 'sr' ? 'Profesionalan web sajt za komarnike i klizna vrata - jasna ponuda i kontakti' : 'Professional website for screens and sliding doors — clear offer and contacts', text: language === 'sr' ? 'Moderan sajt sa uslugama i flotom. Klijent zadovoljan preglednošću.' : 'Modern site with services and fleet. Client happy with clarity.' },
-                  { id: 'loki', logo: '/images/lokilo.png', siteImg: '/images/loki.png', title: 'Loki N-4', tag: language === 'sr' ? 'Betonski elementi' : 'Concrete elements', headline: language === 'sr' ? 'Prepoznatljiv brend na webu — identitet i poruka' : 'Recognizable brand online — identity and message', text: language === 'sr' ? 'Jedinstven vizuelni identitet i jasna komunikacija.' : 'Unique visual identity and clear communication.' },
-                  { id: 'bora', logo: '/images/boralogo.jpg', siteImg: '/images/bora.png', title: 'Boracompany', tag: language === 'sr' ? 'CNC obrada' : 'CNC machining', headline: language === 'sr' ? 'Korporativni sajt — profesionalna prezentacija usluga' : 'Corporate site — professional service presentation', text: language === 'sr' ? 'Jasna struktura i poruka brenda. Povećana kredibilitet.' : 'Clear structure and brand message. Increased credibility.' },
-                  { id: 'lako', logo: '/images/logolak.png', siteImg: '/images/lako.png', title: 'Lako Sistem', tag: language === 'sr' ? 'Papirna galanterija' : 'Paper goods', headline: language === 'sr' ? 'Moderan prezentacioni web sajt - preglednost i autoritet. Zadovoljstvo i rezultati.' : 'Modern presentation website — clarity and authority. Satisfaction and results.', text: language === 'sr' ? 'Sajt prilagođen potrebama klijenta. Zadovoljstvo i rezultati.' : 'Site tailored to client needs. Satisfaction and results.' },
-                  { id: 'panic', logo: '/images/logoin.png', siteImg: '/images/panic.png', title: 'IN-STAN', tag: language === 'sr' ? 'Stolarija' : 'Joinery', headline: language === 'sr' ? 'Moderan funkcionalan sajt za stolariju sa katalogom' : 'Modern functional website for joinery with catalog', text: language === 'sr' ? 'Profesionalan sajt koji predstavlja brend na internetu.' : 'Professional site that represents the brand online.' },
-                  { id: 'jastuci', logo: '/images/logo2.png', siteImg: '/images/jastuci.png', title: 'Vazdušni jastuci', tag: language === 'sr' ? 'Auto delovi' : 'Auto parts', headline: language === 'sr' ? 'Sajt za auto delove — katalog i upiti' : 'Site for auto parts — catalog and inquiries', text: language === 'sr' ? 'Pregledan katalog i kontakt forma. Više upita sa sajta.' : 'Clear catalog and contact form. More inquiries from site.' },
+                  { id: 'prestige', logo: '/images/logop.png', siteImg: '/images/prestige.png', title: 'Prestige Gradnja', url: 'https://prestigegradnja.rs/', tag: language === 'sr' ? 'Nekretnine, gradnja' : 'Real estate, construction', headline: language === 'sr' ? 'Sajt za nekretnine i apartmane — projekti i kontakt' : 'Site for real estate and apartments — projects and contact', text: language === 'sr' ? 'Moderan izgled i jasna ponuda. Klijent zadovoljan.' : 'Modern look and clear offer. Client satisfied.' },
+                  { id: 'rc', logo: '/images/logo.png', siteImg: '/images/borakk.png', title: 'Custom RC Parts', url: 'https://customrc.parts/', tag: language === 'sr' ? 'E-commerce, RC delovi' : 'E-commerce, RC parts', headline: language === 'sr' ? 'Web prodavnica za RC delove — porudžbine i katalog' : 'Online store for RC parts — orders and catalog', text: language === 'sr' ? 'Funkcionalan shop sa kategorijama i plaćanjem. Rast prodaje preko sajta.' : 'Functional shop with categories and payment. Sales growth via site.' },
+                  { id: 'kralj', logo: '/images/Beli%20logo2.png', siteImg: '/images/kralj.png', title: 'Kralj Residence', url: 'https://kraljresidence.rs/', tag: language === 'sr' ? 'apartmani i nekretnine' : 'Apartments & real estate', headline: language === 'sr' ? 'Moderan sajt za prodaju stanova - direktna prodaja' : 'Modern site for apartment sales — direct sales', text: language === 'sr' ? 'Responzivan sajt sa jasnom ponudom stanova. Zadovoljan klijent.' : 'Responsive site with clear property offer. Happy client.' },
+                  { id: 'bn', logo: '/images/logobn.png', siteImg: '/images/bn.png', title: 'BN Autofolije', url: 'https://bnautofolije.com/', tag: language === 'sr' ? 'Auto folije i detailing' : 'Car wraps & detailing', headline: language === 'sr' ? 'Web sajt za auto folije — više upita i preglednosti' : 'Website for car wraps — more inquiries and visibility', text: language === 'sr' ? 'Profesionalna prezentacija i galerija radova. Više upita.' : 'Professional presentation and portfolio. More inquiries.' },
+                  { id: 'poklon', logo: '/images/poklonilogo.png', siteImg: '/images/poklon.png', title: 'Pokloni Portret', url: 'https://pokloniportret.rs/', tag: language === 'sr' ? 'Personalizovani pokloni' : 'Personalized gifts', headline: language === 'sr' ? 'Portreti po narudžbini — galerija i porudžbine' : 'Custom portraits — gallery and orders', text: language === 'sr' ? 'Umetnički brend na webu. Lako naručivanje i pregled radova.' : 'Art brand online. Easy ordering and portfolio view.' },
+                  { id: 'komotraks', logo: '/images/komotraks-logotip.png', siteImg: '/images/komotraks.png', title: 'Komotraks', url: 'https://ugradnja-zavesa-komarnika.com/', tag: language === 'sr' ? 'Komarnici' : 'Screens & sliding doors', headline: language === 'sr' ? 'Profesionalan web sajt za komarnike i klizna vrata - jasna ponuda i kontakti' : 'Professional website for screens and sliding doors — clear offer and contacts', text: language === 'sr' ? 'Moderan sajt sa uslugama i flotom. Klijent zadovoljan preglednošću.' : 'Modern site with services and fleet. Client happy with clarity.' },
+                  { id: 'loki', logo: '/images/lokilo.png', siteImg: '/images/loki.png', title: 'Loki N-4', url: 'https://lokin4.rs/', tag: language === 'sr' ? 'Betonski elementi' : 'Concrete elements', headline: language === 'sr' ? 'Prepoznatljiv brend na webu — identitet i poruka' : 'Recognizable brand online — identity and message', text: language === 'sr' ? 'Jedinstven vizuelni identitet i jasna komunikacija.' : 'Unique visual identity and clear communication.' },
+                  { id: 'bora', logo: '/images/boralogo.jpg', siteImg: '/images/bora.png', title: 'Boracompany', url: 'https://boracompany.ch/', tag: language === 'sr' ? 'CNC obrada' : 'CNC machining', headline: language === 'sr' ? 'Korporativni sajt — profesionalna prezentacija usluga' : 'Corporate site — professional service presentation', text: language === 'sr' ? 'Jasna struktura i poruka brenda. Povećana kredibilitet.' : 'Clear structure and brand message. Increased credibility.' },
+                  { id: 'lako', logo: '/images/logolak.png', siteImg: '/images/lako.png', title: 'Lako Sistem', url: 'https://lakosistem.rs/', tag: language === 'sr' ? 'Papirna galanterija' : 'Paper goods', headline: language === 'sr' ? 'Moderan prezentacioni web sajt - preglednost i autoritet. Zadovoljstvo i rezultati.' : 'Modern presentation website — clarity and authority. Satisfaction and results.', text: language === 'sr' ? 'Sajt prilagođen potrebama klijenta. Zadovoljstvo i rezultati.' : 'Site tailored to client needs. Satisfaction and results.' },
+                  { id: 'panic', logo: '/images/logoin.png', siteImg: '/images/panic.png', title: 'IN-STAN', url: 'https://in-stan.rs/', tag: language === 'sr' ? 'Stolarija' : 'Joinery', headline: language === 'sr' ? 'Moderan funkcionalan sajt za stolariju sa katalogom' : 'Modern functional website for joinery with catalog', text: language === 'sr' ? 'Profesionalan sajt koji predstavlja brend na internetu.' : 'Professional site that represents the brand online.' },
+                  { id: 'jastuci', logo: '/images/logo2.png', siteImg: '/images/jastuci.png', title: 'Vazdušni jastuci', url: 'https://vazdusnijastuci.rs/', tag: language === 'sr' ? 'Auto delovi' : 'Auto parts', headline: language === 'sr' ? 'Sajt za auto delove — katalog i upiti' : 'Site for auto parts — catalog and inquiries', text: language === 'sr' ? 'Pregledan katalog i kontakt forma. Više upita sa sajta.' : 'Clear catalog and contact form. More inquiries from site.' },
                 ].map((card) => (
-                  <div key={card.id} className="rounded-2xl border border-gray-700/60 bg-gray-900/60 backdrop-blur-sm overflow-hidden shadow-xl flex flex-col h-full">
+                  <div
+                    key={card.id}
+                    className="group rounded-2xl border border-gray-700/60 bg-gray-900/60 backdrop-blur-sm overflow-hidden shadow-xl flex flex-col h-full transition-all duration-300 ease-out hover:border-violet-500/50 hover:shadow-violet-500/10 hover:shadow-2xl hover:-translate-y-1.5"
+                  >
                     <div className="p-5 md:p-6 flex flex-col flex-1 min-h-0">
                       <div className="flex-1 flex flex-col min-h-0">
                         <div className="flex gap-0.5 mb-3">
@@ -557,21 +560,34 @@ export function FunnelPage() {
                         <h3 className="text-violet-300 font-bold text-sm md:text-base mb-3 leading-snug">
                           {card.headline}
                         </h3>
-                        <div className="aspect-video rounded-lg bg-gray-800 border border-gray-700 mb-4 overflow-hidden">
-                          <img src={card.siteImg} alt={card.title} className="w-full h-full object-cover" />
+                        <div className="aspect-video rounded-lg bg-gray-800 border border-gray-700 mb-4 overflow-hidden relative">
+                          <img src={card.siteImg} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed mb-4">
                           {card.text}
                         </p>
                       </div>
-                      <div className="flex items-center gap-3 mt-auto flex-shrink-0">
-                        <div className={`w-24 h-14 md:w-28 md:h-16 rounded-lg border flex-shrink-0 overflow-hidden flex items-center justify-center p-1.5 ${['rc', 'bora', 'lako', 'panic'].includes(card.id) ? 'bg-white border-gray-300' : 'bg-gray-800 border-gray-700'}`}>
-                          <img src={card.logo} alt="" className="max-w-full max-h-full w-auto h-auto object-contain" />
+                      <div className="flex items-center justify-between mt-auto flex-shrink-0">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-24 h-14 md:w-28 md:h-16 rounded-lg border flex-shrink-0 overflow-hidden flex items-center justify-center p-1.5 ${['rc', 'bora', 'lako', 'panic'].includes(card.id) ? 'bg-white border-gray-300' : 'bg-gray-800 border-gray-700'}`}>
+                            <img src={card.logo} alt="" className="max-w-full max-h-full w-auto h-auto object-contain" />
+                          </div>
+                          <div>
+                            <p className="text-white font-medium text-sm">{card.title}</p>
+                            <p className="text-gray-500 text-xs">{card.tag}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-white font-medium text-sm">{card.title}</p>
-                          <p className="text-gray-500 text-xs">{card.tag}</p>
-                        </div>
+                        <a
+                          href={card.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-violet-600/20 border border-violet-500/30 text-violet-300 text-xs font-semibold whitespace-nowrap transition-all duration-200 hover:bg-violet-600 hover:text-white hover:border-violet-500 hover:scale-105 active:scale-95 flex-shrink-0 opacity-0 group-hover:opacity-100"
+                          title={language === 'sr' ? 'Otvori sajt u novom prozoru' : 'Open site in new window'}
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          <span className="hidden sm:inline">{language === 'sr' ? 'Poseti sajt' : 'Visit site'}</span>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -881,59 +897,54 @@ export function FunnelPage() {
                     </div>
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4">
                       <span className="text-violet-400">
-                        {language === 'sr' ? 'Stigli ste do ovde — sada ' : "You've made it this far — now "}
+                        {language === 'sr' ? 'Stigli ste do ovde ' : "You've made it this far "}
                       </span>
                       <span className="text-white">
-                        {language === 'sr' ? 'skalirajmo vaš biznis.' : "let's scale your business."}
+                        {language === 'sr' ? '— i to nije slučajno.' : "— and that's no accident."}
                       </span>
                     </h2>
-                    <p className="text-gray-400 text-sm leading-snug mb-3 md:leading-relaxed md:text-base md:mb-6 max-w-xl">
-                      {language === 'sr' ? (
-                        <>Potrebno je 30 sekundi da se{' '}
-                          <button
-                            type="button"
-                            onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="text-violet-300 font-bold hover:text-violet-200 underline underline-offset-2 cursor-pointer"
-                          >
-                            prijavite
-                          </button>
-                          {' '}i proverimo da li AiSajt može da vam pomogne da brže rastete — sa jasnoćom i rezultatima.</>
-                      ) : (
-                        <>Take 30 seconds to{' '}
-                          <button
-                            type="button"
-                            onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="text-violet-300 font-bold hover:text-violet-200 underline underline-offset-2 cursor-pointer"
-                          >
-                            apply now
-                          </button>
-                          {' '}and let's see if AiSajt is the right fit to help you scale faster—with clarity and results.</>
-                      )}
+                    <p className="text-gray-400 text-sm leading-snug mb-3 md:leading-relaxed md:text-base md:mb-4 max-w-xl">
+                      {language === 'sr'
+                        ? 'Vlasnici biznisa koji ozbiljno razmišljaju o rastu ne čekaju da se stvari same poslažu. Oni traže pravi sistem, prave ljude i pravu strategiju, i kada to pronadju, kreću brzo.'
+                        : "Business owners who are serious about growth don't wait for things to fall into place. They look for the right system, the right people and the right strategy — and when they find it, they move fast."
+                      }
+                    </p>
+                    <p className="text-gray-300 text-sm md:text-base mb-5 max-w-xl">
+                      {language === 'sr'
+                        ? 'Ako ste u toj fazi — ambiciozni, spremni da privučete skuplje klijente i izgradite nešto što zaista radi, onda je ovaj poziv za vas.'
+                        : "If you're at that stage — ambitious, ready to attract higher-paying clients and build something that actually works — this call is for you."
+                      }
                     </p>
                     <p className="text-white font-medium text-sm mb-3">
-                      {language === 'sr' ? 'Šta ćemo obraditi na besplatnom pozivu:' : "Here's what we'll cover on your free discovery call:"}
+                      {language === 'sr' ? 'Za 30 minuta zajedno prolazimo kroz:' : "In 30 minutes we'll go through:"}
                     </p>
-                    <ul className="space-y-2 mb-6">
+                    <ul className="space-y-2.5 mb-6">
                       {[
-                        language === 'sr' ? 'Pregled vaše trenutne situacije i ciljeva' : 'Review your current situation + goals',
-                        language === 'sr' ? 'Brze pobede i skrivene prilike' : 'Spot quick wins and hidden gaps',
-                        language === 'sr' ? 'Iskren savet o sledećim koracima' : 'Share honest advice on next steps',
-                        language === 'sr' ? 'Bez pritiska, bez nametljive prodaje' : 'No pressure, no hard pitch',
+                        language === 'sr' ? 'Vašu trenutnu situaciju i ciljeve — gde ste sada i gde želite da budete' : 'Your current situation & goals — where you are now and where you want to be',
+                        language === 'sr' ? 'Brze pobede i skrivene prilike — šta možete da primenite odmah, bez čekanja' : 'Quick wins & hidden opportunities — what you can implement right away',
+                        language === 'sr' ? 'Iskren savet o sledećim koracima — konkretan, prilagođen vašem biznisu, bez generičkih saveta' : 'Honest advice on next steps — specific, tailored to your business, no generic tips',
                       ].map((item) => (
-                        <li key={item} className="flex items-center gap-3 text-gray-300 text-sm">
-                          <CheckCircle className="w-5 h-5 text-violet-400 flex-shrink-0" />
+                        <li key={item} className="flex items-start gap-3 text-gray-300 text-sm">
+                          <CheckCircle className="w-5 h-5 text-violet-400 flex-shrink-0 mt-0.5" />
                           {item}
                         </li>
                       ))}
                     </ul>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-200 text-sm md:text-base font-semibold mb-2">
+                      {language === 'sr' ? 'Nećete dobiti prodajnu ponudu. Dobićete jasnoću.' : "You won't get a sales pitch. You'll get clarity."}
+                    </p>
+                    <p className="text-gray-400 text-sm max-w-xl mb-3">
                       {language === 'sr' ? (
-                        <>Kontaktiraćemo vas i na pozivu ćete dobiti <strong className="text-white">konkretan savet i jasne sledeće korake</strong> za vaš biznis. Bez obaveze — fokus je na vašem uspehu.</>
+                        <>Na kraju poziva znaćete tačno šta vas koči, šta je sledeći korak i da li smo pravi partner za tu fazu vašeg rasta. <strong className="text-white">Bez obaveze</strong> — ali sa konkretnim odgovorima koje možete da primenite odmah, bez obzira na to kako se odlučite.</>
                       ) : (
-                        <>We’ll contact you and on the call you’ll get <strong className="text-white">concrete advice and clear next steps</strong> for your business. No obligation — the focus is on your success.</>
+                        <>By the end of the call you'll know exactly what's holding you back, what's next, and whether we're the right partner for this stage of your growth. <strong className="text-white">No obligation</strong> — but with concrete answers you can act on immediately, no matter what you decide.</>
                       )}
                     </p>
+                    <p className="text-violet-300 text-sm font-semibold">
+                      {language === 'sr' ? 'Prijava traje 30 sekundi. Ostatak je na nama.' : 'Signing up takes 30 seconds. The rest is on us.'}
+                    </p>
                   </div>
+
 
                   {/* Desna kolona – samo glavna slika, centrirana */}
                   <div className="relative flex items-center justify-center w-full max-w-md">
