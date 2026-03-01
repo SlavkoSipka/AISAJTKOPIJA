@@ -22,6 +22,7 @@ const BlogPostPage = lazy(() => import('./components/pages/BlogPostPage').then(m
 const BlogCategoryPage = lazy(() => import('./components/pages/BlogCategoryPage').then(m => ({ default: m.BlogCategoryPage })));
 const IzradaSajtaDetaljiPage = lazy(() => import('./components/pages/IzradaSajtaDetaljiPage').then(m => ({ default: m.IzradaSajtaDetaljiPage })));
 const SEOOdrzavanjeDetaljiPage = lazy(() => import('./components/pages/SEOOdrzavanjeDetaljiPage').then(m => ({ default: m.SEOOdrzavanjeDetaljiPage })));
+const CaseStudyPage = lazy(() => import('./components/pages/CaseStudyPage').then(m => ({ default: m.CaseStudyPage })));
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
@@ -77,6 +78,8 @@ function AppContent() {
           <Route path="/resources/audit" element={<AuditFormPage />} />
           <Route path="/resources/guide" element={<LeadMagnetDownloadPage />} />
           <Route path="/resources/checklist" element={<LeadMagnetDownloadPage />} />
+          {/* Portfolio / Case Study Routes */}
+          <Route path="/portfolio/:slug" element={<CaseStudyPage />} />
           {/* Blog Routes */}
           <Route path="/blog" element={<BlogHubPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />

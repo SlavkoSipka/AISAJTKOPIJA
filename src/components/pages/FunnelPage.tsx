@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Play, ExternalLink, Star } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CheckCircle, Play, ExternalLink, Star } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useLanguage } from '../../hooks/useLanguage';
 import { SEOHelmet } from '../seo/SEOHelmet';
@@ -589,6 +589,19 @@ export function FunnelPage() {
                           <span className="hidden sm:inline">{language === 'sr' ? 'Poseti sajt' : 'Visit site'}</span>
                         </a>
                       </div>
+                      {/* Case Study link for projects that have one */}
+                      {(['prestige', 'rc', 'kralj', 'bn'] as const).includes(card.id as any) && (
+                        <div className="px-5 md:px-6 pb-4">
+                          <a
+                            href={`/portfolio/${card.id === 'prestige' ? 'prestige-gradnja' : card.id === 'rc' ? 'custom-rc-parts' : card.id === 'kralj' ? 'kralj-residence' : 'bn-autofolije'}`}
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-violet-600/10 border border-violet-500/20 text-violet-300 text-xs font-semibold transition-all duration-200 hover:bg-violet-600 hover:text-white hover:border-violet-500"
+                          >
+                            <span>{language === 'sr' ? 'Pogledaj Case Study' : 'View Case Study'}</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}

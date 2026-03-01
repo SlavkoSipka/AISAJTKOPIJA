@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { PortfolioCard } from '../cards/PortfolioCard';
 import { Language } from '../../types/language';
+import { portfolioUrlToSlug } from '../../data/caseStudies';
 
 interface PortfolioCarouselProps {
   language: Language;
@@ -228,6 +229,7 @@ export function PortfolioCarousel({ language }: PortfolioCarouselProps) {
                       image={item.image}
                       tags={item.tags}
                       link={item.link}
+                      caseStudySlug={portfolioUrlToSlug[item.link] || portfolioUrlToSlug[item.link + '/'] || undefined}
                     />
                   </div>
                 </div>

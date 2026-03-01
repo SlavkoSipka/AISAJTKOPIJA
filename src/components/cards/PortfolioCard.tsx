@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { translations } from '../../types/language';
@@ -10,24 +11,22 @@ interface PortfolioCardProps {
   image: string;
   tags: string[];
   link?: string;
+  caseStudySlug?: string;
 }
 
-export const PortfolioCard = React.memo(function PortfolioCard({ title, description, image, tags, link }: PortfolioCardProps) {
+export const PortfolioCard = React.memo(function PortfolioCard({ title, description, image, tags, link, caseStudySlug }: PortfolioCardProps) {
   const { language } = useLanguage();
   const t = translations[language];
   
-  if (!link) {
+  if (!link && !caseStudySlug) {
     return null;
   }
 
-  return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={() => trackPortfolioClick(title, link, language)}
-      className="group relative block bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-violet-400 transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/30 hover:-translate-y-2 cursor-pointer"
-    >
+  const isInternal = !!caseStudySlug;
+  const href = isInternal ? `/portfolio/${caseStudySlug}` : link!;
+
+  const inner = (
+    <>
       {/* Image Container */}
       <div className="relative h-72 overflow-hidden bg-gray-50">
         <img 
@@ -42,7 +41,7 @@ export const PortfolioCard = React.memo(function PortfolioCard({ title, descript
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
           <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
             <div className="flex items-center gap-2 text-white font-semibold text-lg mb-2">
-              <span>{t.viewWebsite}</span>
+              <span>{isInternal ? (language === 'sr' ? 'Pogledaj Case Study' : 'View Case Study') : t.viewWebsite}</span>
               <ArrowUpRight className="w-5 h-5 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </div>
             <p className="text-white/90 text-sm">{description}</p>
@@ -78,6 +77,32 @@ export const PortfolioCard = React.memo(function PortfolioCard({ title, descript
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-violet-500 via-indigo-500 to-pink-500 blur-xl opacity-20"></div>
       </div>
+    </>
+  );
+
+  const className = "group relative block bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-violet-400 transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/30 hover:-translate-y-2 cursor-pointer";
+
+  if (isInternal) {
+    return (
+      <Link
+        to={href}
+        onClick={() => trackPortfolioClick(title, href, language)}
+        className={className}
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => trackPortfolioClick(title, href, language)}
+      className={className}
+    >
+      {inner}
     </a>
   );
 });

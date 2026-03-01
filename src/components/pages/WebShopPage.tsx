@@ -34,6 +34,22 @@ export function WebShopPage() {
     {
       question: "Cena održavanja internet prodavnice nakon izrade web shopa?",
       answer: "Hosting, sigurnost, backup i tehnička podrška od 40-70€ mesečno. Sa profesionalnom SEO optimizacijom koja dovodi web shop na prvu poziciju Google-a, cena je od 250€ mesečno."
+    },
+    {
+      question: "Da li izrada web shopa uključuje responzivni mobilni dizajn?",
+      answer: "Da! Svi naši shopovi su potpuno responzivni. Preko 60% kupovine dolazi sa telefona, zato je mobile-first pristup obavezan."
+    },
+    {
+      question: "SEO optimizacija web shopa za Instagram i društvene mreže?",
+      answer: "Integrišemo Facebook Pixel i Instagram Shopping - tagujte proizvode na storyima i kupci naručuju direktno. Uključeno u Advanced i Enterprise pakete."
+    },
+    {
+      question: "Pravni zahtevi za pokretanje web prodavnice u Srbiji?",
+      answer: "Preporučujemo registraciju paušalnog preduzetnika ili DOO-a za legalno fakturisanje i ugovor sa bankama za online plaćanje."
+    },
+    {
+      question: "Kako doći na prvu poziciju Google sa novim web shopom?",
+      answer: "Kombinacija Facebook/Instagram oglasa (10-15€ dnevno) i SEO optimizacija. Za 3-6 meseci možete biti na prvoj poziciji Google za vaše proizvode."
     }
   ] : [];
 
@@ -84,7 +100,7 @@ export function WebShopPage() {
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-8 md:mb-12">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-4 md:mb-6 px-2">
-                  {language === 'sr' ? 'Izrada Web Shopa' : 'Web Shop Development'}
+                  {language === 'sr' ? 'Izrada Web Shopa - Beograd' : 'Web Shop Development - Belgrade'}
                 </h1>
 
                 <p className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-6 md:mb-8 px-4">
@@ -432,19 +448,10 @@ export function WebShopPage() {
                     <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                       Web Shop Kao Digitalni Kanal Prodaje - Neograničene Mogućnosti
                     </h3>
-                    {/* Mobile - Short */}
-                    <p className="md:hidden text-base text-gray-700 leading-relaxed mb-4">
-                      Izrada web shopa je investicija u budućnost biznisa. Dok fizička prodavnica radi 8-10 sati, online prodavnica radi 24/7. Kupci pregledaju, kupuju i plaćaju dok vi spavite. Cena izrade se vraća kroz povećanu prodaju već u prvim mesecima, a doseg ide širom Srbije, regiona i sveta.
-                    </p>
-                    <p className="md:hidden text-base text-gray-700 leading-relaxed">
-                      Profesionalna <Link to="/izrada-sajta-cena" className="text-indigo-600 hover:text-indigo-700 font-semibold underline">izrada sajta</Link> sa e-commerce funkcionalnostima automatizuje prodaju i smanjuje troškove. Web shop ne zahteva kiriju ili radno vreme - konstantno generiše prihod bez dodatnih troškova.
-                    </p>
-                    
-                    {/* Desktop - Full */}
-                    <p className="hidden md:block text-base md:text-lg text-gray-700 leading-relaxed mb-4">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
                       Izrada web shopa nije samo tehnički projekat - to je investicija u budućnost vašeg biznisa. Dok tradicionalna prodavnica u Beogradu ili Novom Sadu radi 8-10 sati dnevno, online prodavnica radi 24/7 bez pauze. Vaši kupci mogu da pregledaju proizvode, dodaju ih u korpu i plate dok vi spavite. To znači da svaki dan gubite profit ako nemate web shop. Cena izrade web prodavnice se vraća kroz povećanu prodaju već u prvim mesecima. Biznis sa internet prodavnicom dostiže klijente ne samo u svom gradu, već širom Srbije, regiona, pa i sveta.
                     </p>
-                    <p className="hidden md:block text-base md:text-lg text-gray-700 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                       Profesionalna <Link to="/izrada-sajta-cena" className="text-indigo-600 hover:text-indigo-700 font-semibold underline">izrada sajta</Link> sa e-commerce funkcionalnostima omogućava vam da automatizujete proces prodaje, smanjite troškove zaposlenih i fokusirate se na širenje asortimana. Za razliku od fizičke prodavnice, web shop ne zahteva kiriju, velike troškove režija ili radno vreme. To je kanal koji konstantno generiše prihod bez dodatnih troškova po transakciji.
                     </p>
                   </div>
@@ -454,19 +461,10 @@ export function WebShopPage() {
                     <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                       SEO Optimizacija i Prva Pozicija na Google - Ključ Uspeha Web Shopa
                     </h3>
-                    {/* Mobile - Short */}
-                    <p className="md:hidden text-base text-gray-700 leading-relaxed mb-4">
-                      Web shop bez vidljivosti je beskoristan. <Link to="/seo-optimizacija-cena" className="text-indigo-600 hover:text-indigo-700 font-semibold underline">SEO optimizacija</Link> stavlja vašu prodavnicu na prvu stranicu Google-a. Kada neko traži "kupovina Beograd" ili "online prodavnica Srbija", vi morate biti među prvima. Bez SEO-a, tehnički radite, ali niko ne kupuje.
-                    </p>
-                    <p className="md:hidden text-base text-gray-700 leading-relaxed">
-                      Naš pristup uključuje SEO od prvog dana - brz sajt, optimizovane slike, čist kod. Google odmah razume šta prodajete. Rezultat? Viša pozicija, više saobraćaja, više porudžbina. Biznisi sa kontinuiranom SEO optimizacijom postižu do 400% ROI u prvoj godini.
-                    </p>
-                    
-                    {/* Desktop - Full */}
-                    <p className="hidden md:block text-base md:text-lg text-gray-700 leading-relaxed mb-4">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
                       Najbolji web shop je beskoristan ako ga niko ne pronađe. Tu dolazi <Link to="/seo-optimizacija-cena" className="text-indigo-600 hover:text-indigo-700 font-semibold underline">SEO optimizacija</Link> - proces koji stavlja vašu online prodavnicu na prvu stranicu Google rezultata kada potencijalni kupci pretražuju vaše proizvode. Kada neko ukuca "kupovina proizvoda Beograd" ili "online prodavnica Srbija", vi želite da budete među prvima. Izrada sajta za online prodaju bez SEO strategije je kao otvaranje prodavnice u sokaku gde niko ne prolazi - tehnički radi, ali niko ne kupuje.
                     </p>
-                    <p className="hidden md:block text-base md:text-lg text-gray-700 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                       Naš pristup izrade web shopa uključuje osnovnu SEO optimizaciju od prvog dana - optimizovane slike, brz sajt, čisti kod, struktuirani podaci. To znači da Google odmah razume šta prodajete i kome. Rezultat? Viša pozicija u rezultatima pretrage, više organskog saobraćaja, više porudžbina. Biznisi koji kombinuju kvalitetnu izradu internet prodavnice sa kontinuiranom SEO optimizacijom postižu do 400% ROI u prvoj godini. To nije pretera - to je realnost digitalne prodaje u 2025.
                     </p>
                   </div>
@@ -476,19 +474,10 @@ export function WebShopPage() {
                     <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                       Marketing Mogućnosti i Širenje Biznisa Kroz Online Prodavnicu
                     </h3>
-                    {/* Mobile - Short */}
-                    <p className="md:hidden text-base text-gray-700 leading-relaxed mb-4">
-                      Web shop je marketing mašina. Svaki proizvod je prilika za targetiranje kupaca. Facebook oglasi, Google Ads, email marketing - sve vodi u vašu prodavnicu. Digitalni marketing daje precizne metrike: koliko je kliknulo, dodalo u korpu, kupilo.
-                    </p>
-                    <p className="md:hidden text-base text-gray-700 leading-relaxed">
-                      Cena izrade se višestruko isplati kroz targetirani marketing. Kreirajte kampanje za različite segmente - popusti za nove, loyalty za postojeće, retargeting za napuštene korpe. Profesionalni <Link to="/web-dizajn" className="text-indigo-600 hover:text-indigo-700 font-semibold underline">web dizajn</Link> gradi poverenje i konvertuje posetioce u kupce. Biznis bez web shopa stagnira dok konkurencija raste.
-                    </p>
-                    
-                    {/* Desktop - Full */}
-                    <p className="hidden md:block text-base md:text-lg text-gray-700 leading-relaxed mb-4">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
                       Web shop nije samo prodajni kanal - to je marketing mašina. Svaki proizvod, svaka kategorija, svaka landing stranica je prilika za targetiranje različitih kupaca. Facebook oglasi, Google Ads, email marketing, influencer kampanje - sve to vodi direktno u vašu online prodavnicu gde se dešava konverzija. Za razliku od tradicionalnog marketinga gde ne znate koliko ljudi je videlo bilboard ili flayer, digitalni marketing kroz web shop daje precizne metrike: koliko ljudi je kliknulo, koliko je dodalo u korpu, koliko je kupilo.
                     </p>
-                    <p className="hidden md:block text-base md:text-lg text-gray-700 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                       Cena izrade web prodavnice se višestruko isplati kroz targetirani marketing. Možete kreirati specifične kampanje za različite segmente - popusti za nove kupce, loyalty programi za postojeće, retargeting za one koji su napustili korpu. Sve to je automatizovano i precizno. Dodatno, profesionalni <Link to="/web-dizajn" className="text-indigo-600 hover:text-indigo-700 font-semibold underline">web dizajn</Link> osigurava da vaša internet prodavnica ne samo privlači pažnju, već i gradi poverenje i konvertuje posetioce u kupce. U eri digitalne transformacije, biznis bez web shopa je biznis koji stagnira dok konkurencija raste.
                     </p>
                   </div>
@@ -878,11 +867,38 @@ export function WebShopPage() {
 
                     <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
                       <button
-                        onClick={() => setOpenFAQIndex(openFAQIndex === 7 ? null : 7)}
+                        onClick={() => setOpenFAQIndex(openFAQIndex === 6 ? null : 6)}
                         className="w-full px-6 md:px-8 py-5 md:py-6 flex items-start justify-between gap-4 text-left transition-colors duration-300 hover:bg-gray-50"
                       >
                         <span className="text-lg md:text-xl font-semibold text-gray-900 flex-1">
                           SEO optimizacija web shopa za Instagram i društvene mreže?
+                        </span>
+                        <ChevronDown
+                          className={`w-6 h-6 text-indigo-600 flex-shrink-0 transition-transform duration-300 ${
+                            openFAQIndex === 6 ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                      <div
+                        className={`transition-all duration-300 ease-in-out ${
+                          openFAQIndex === 6 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                        }`}
+                      >
+                        <div className="px-6 md:px-8 pb-5 md:pb-6 pt-2">
+                          <p className="text-gray-600 leading-relaxed">
+                            Integrišemo Facebook Pixel i Instagram Shopping - tagujte proizvode na storyima i kupci naručuju direktno. Uključeno u Advanced i Enterprise pakete.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+                      <button
+                        onClick={() => setOpenFAQIndex(openFAQIndex === 7 ? null : 7)}
+                        className="w-full px-6 md:px-8 py-5 md:py-6 flex items-start justify-between gap-4 text-left transition-colors duration-300 hover:bg-gray-50"
+                      >
+                        <span className="text-lg md:text-xl font-semibold text-gray-900 flex-1">
+                          Pravni zahtevi za pokretanje web prodavnice u Srbiji?
                         </span>
                         <ChevronDown
                           className={`w-6 h-6 text-indigo-600 flex-shrink-0 transition-transform duration-300 ${
@@ -897,7 +913,7 @@ export function WebShopPage() {
                       >
                         <div className="px-6 md:px-8 pb-5 md:pb-6 pt-2">
                           <p className="text-gray-600 leading-relaxed">
-                            Integrišemo Facebook Pixel i Instagram Shopping - tagujte proizvode na storyima i kupci naručuju direktno. Uključeno u Advanced i Enterprise pakete.
+                            Preporučujemo registraciju paušalnog preduzetnika ili DOO-a za legalno fakturisanje i ugovor sa bankama za online plaćanje.
                           </p>
                         </div>
                       </div>
@@ -909,7 +925,7 @@ export function WebShopPage() {
                         className="w-full px-6 md:px-8 py-5 md:py-6 flex items-start justify-between gap-4 text-left transition-colors duration-300 hover:bg-gray-50"
                       >
                         <span className="text-lg md:text-xl font-semibold text-gray-900 flex-1">
-                          Pravni zahtevi za pokretanje web prodavnice u Srbiji?
+                          Kako doći na prvu poziciju Google sa novim web shopom?
                         </span>
                         <ChevronDown
                           className={`w-6 h-6 text-indigo-600 flex-shrink-0 transition-transform duration-300 ${
@@ -920,33 +936,6 @@ export function WebShopPage() {
                       <div
                         className={`transition-all duration-300 ease-in-out ${
                           openFAQIndex === 8 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                      >
-                        <div className="px-6 md:px-8 pb-5 md:pb-6 pt-2">
-                          <p className="text-gray-600 leading-relaxed">
-                            Preporučujemo registraciju paušalnog preduzetnika ili DOO-a za legalno fakturisanje i ugovor sa bankama za online plaćanje.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
-                      <button
-                        onClick={() => setOpenFAQIndex(openFAQIndex === 9 ? null : 9)}
-                        className="w-full px-6 md:px-8 py-5 md:py-6 flex items-start justify-between gap-4 text-left transition-colors duration-300 hover:bg-gray-50"
-                      >
-                        <span className="text-lg md:text-xl font-semibold text-gray-900 flex-1">
-                          Kako doći na prvu poziciju Google sa novim web shopom?
-                        </span>
-                        <ChevronDown
-                          className={`w-6 h-6 text-indigo-600 flex-shrink-0 transition-transform duration-300 ${
-                            openFAQIndex === 9 ? 'rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                      <div
-                        className={`transition-all duration-300 ease-in-out ${
-                          openFAQIndex === 9 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                         }`}
                       >
                         <div className="px-6 md:px-8 pb-5 md:pb-6 pt-2">

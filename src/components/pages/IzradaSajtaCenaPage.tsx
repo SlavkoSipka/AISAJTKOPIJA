@@ -17,7 +17,7 @@ export function IzradaSajtaCenaPage() {
   const faqItems = language === 'sr' ? [
     {
       question: "Zašto cena izrade sajta nije fiksna?",
-      answer: "Svaki biznis ima jedinstvene potrebe i ciljeve. Web shop sa 100 proizvoda zahteva mnogo više rada nego prezentacioni sajt sa 5 stranica. Zato početna cena počinje od 299€ za jednostavne projekte, a za kompleksnije pravimo personalizovanu ponudu - uvek transparentnu bez skrivenih troškova."
+      answer: "Svaki biznis ima jedinstvene potrebe. Startna cena od 299€ za jednostavne projekte. Za složenije pravimo personalizovanu ponudu - transparentnu i bez skrivenih troškova."
     },
     {
       question: "Da li izrada web sajta uključuje hosting i domen?",
@@ -33,15 +33,44 @@ export function IzradaSajtaCenaPage() {
     },
     {
       question: "Kako izgleda proces saradnje?",
-      answer: "Profesionalna izrada web sajta prati jasnu strukturu: (1) Besplatna konsultacija, (2) Pisana ponuda, (3) Ugovor, (4) Dizajn faza sa revizijama, (5) Programiranje i razvoj, (6) Testiranje, (7) Lansiranje i obuka. Tokom celog procesa imate transparentan uvid."
+      answer: "Profesionalna izrada web sajta prati jasnu strukturu: (1) Besplatna konsultacija gde razgovaramo o ciljevima, (2) Pisana ponuda sa tačnom cenom i planom, (3) Ugovor i početak projekta, (4) Dizajn faza sa revizijama, (5) Programiranje i razvoj, (6) Testiranje, (7) Lansiranje i obuka. Tokom celog procesa imate transparentan uvid u napredak i mogućnost feedback-a."
     },
     {
       question: "Šta ako nisam zadovoljan dizajnom?",
-      answer: "Proces izrade sajta uključuje više faza pregleda i revizija. Prvo kreiramo dizajn mockup, dobijamo vaš feedback, i radimo izmene dok ne budete 100% zadovoljni. Tek nakon vašeg odobrenja prelazimo na programiranje."
+      answer: "Proces izrade sajta uključuje više faza pregleda i revizija. Prvo kreiramo dizajn mockup, dobijamo vaš feedback, i radimo izmene dok ne budete 100% zadovoljni. Tek nakon vašeg odobrenja prelazimo na programiranje. Nema iznenađenja - sve vidite i odobravate pre nego što postane finalno. To je naš pristup profesionalnoj izradi sajtova."
     },
     {
       question: "Ko je vlasnik sajta nakon izrade?",
-      answer: "Vi ste 100% vlasnik sajta i svih fajlova. Dobijate pristup kod-u, hosting-u, domeni - sve je vaše. Možete ga preseliti na drugi hosting, menjati, razvijati dalje. Nema zaključavanja ili zavisnosti od nas."
+      answer: "Vi ste 100% vlasnik sajta i svih fajlova. Dobijate pristup kod-u, hosting-u, domeni - sve je vaše. Možete ga preseliti na drugi hosting, menjati, razvijati dalje. Nema zaključavanja ili zavisnosti od nas. Profesionalna izrada web sajtova znači da radimo za vas, a vi ste vlasnik svega što kreiramo."
+    }
+  ] : language === 'en' ? [
+    {
+      question: "Why isn't the website development price fixed?",
+      answer: "Every business has unique needs and goals. A web shop with 100 products and warehouse integration requires much more work than a 5-page presentation site. That's why the starting price begins at €299 for simple projects, and for more complex ones we create a personalized offer - always transparent with no hidden costs. Professional website development means adapting to your specific needs, not one-size-fits-all solutions."
+    },
+    {
+      question: "Does the price include hosting and domain?",
+      answer: "Website development price is separate from annual hosting and domain costs. Hosting is the space where your site lives on the internet, and the domain is your address (e.g., yourcompany.com). We help you choose quality hosting and register a domain - you can pay directly or through us. Typically, hosting and domain for a small to medium site cost €50-150 per year."
+    },
+    {
+      question: "Can I add new pages and content later?",
+      answer: "Absolutely! Every professional website development includes an easy content management system (CMS). You can add, change and delete text, images, videos and other content yourself. You'll receive complete training on how to do this. For more complex changes (adding new functionalities, design changes), we're here to help at a reasonable price."
+    },
+    {
+      question: "Do you work with clients worldwide?",
+      answer: "Yes! We develop websites for clients worldwide. All communication is done online (video calls, Slack, email), so physical location is not a barrier to quality collaboration. The website development price remains the same regardless of where you are located."
+    },
+    {
+      question: "What does the collaboration process look like?",
+      answer: "Professional website development follows a clear structure: (1) Free consultation where we discuss goals, (2) Written proposal with exact price and plan, (3) Contract and project start, (4) Design phase with revisions, (5) Programming and development, (6) Testing, (7) Launch and training. Throughout the process you have transparent insight into progress and the ability to provide feedback."
+    },
+    {
+      question: "What if I'm not satisfied with the design?",
+      answer: "The website development process includes multiple review and revision phases. First we create a design mockup, get your feedback, and make changes until you're 100% satisfied. Only after your approval do we proceed with programming. No surprises - you see and approve everything before it becomes final. That's our approach to professional website development."
+    },
+    {
+      question: "Who owns the website after development?",
+      answer: "You are 100% the owner of the website and all files. You get access to the code, hosting, domain - everything is yours. You can move it to another host, modify it, develop it further. No lock-in or dependency on us. Professional website development means we work for you, and you own everything we create."
     }
   ] : [];
 
@@ -116,7 +145,7 @@ export function IzradaSajtaCenaPage() {
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-8 md:mb-12">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-4 md:mb-6 px-2">
-                  {language === 'sr' ? 'Izrada Sajta Cena' : 'Website Development Price'}
+                  {language === 'sr' ? 'Izrada Sajta Cena - Beograd, Novi Sad i Srbija' : 'Website Development Price - Belgrade, Novi Sad and Serbia'}
                 </h1>
 
                 <p className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-6 md:mb-8 px-4">
@@ -146,8 +175,8 @@ export function IzradaSajtaCenaPage() {
                   <div className="flex justify-center mb-1.5 sm:mb-2 md:mb-3">
                     <Rocket className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-violet-600 group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">100+</div>
-                  <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 leading-tight">{language === 'sr' ? 'Projekata' : 'Projects'}</p>
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">50+</div>
+                  <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 leading-tight">{language === 'sr' ? 'Klijenata' : 'Clients'}</p>
                 </div>
 
                 <div className="group bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all duration-300 text-center">

@@ -17,39 +17,39 @@ export function SEOPage() {
   const faqItems = language === 'sr' ? [
     {
       question: "Koliko traje SEO optimizacija sajta do prvih rezultata?",
-      answer: "2-4 meseca za značajne rezultate. Tehničke poboljšanja (brzina, struktura) deluju odmah."
+      answer: "Realističan vremenski rok je 2-4 meseca za značajne rezultate. SEO nije brzo oglašavanje - to je dugoročna investicija. Međutim, tehnička poboljšanja (brzina sajta, struktura) deluju odmah."
     },
     {
       question: "SEO optimizacija cena - jednokratna ili mesečna usluga?",
-      answer: "Oba. Jednokratna optimizacija za fiksnu cenu ili mesečni kontinuirani rad (content, link building)."
+      answer: "Oba opcije su dostupne. Moguća je jednokratna optimizacija (on-page, tehnička) za fiksnu cenu, ili angažovanje našeg tima mesečno za kontinuirani rad (content, link building, praćenje)."
     },
     {
       question: "Cena SEO optimizacije sajta za mali biznis?",
-      answer: "Basic SEO paket od 250€ jednokratno ili 250€ mesečno za kontinuirani rad."
+      answer: "Za male bizise preporučujemo osnovni SEO paket od 250€ jednokratno za tehničku optimizaciju, ili mesečni paket od 250€ za kontinuirani rad na sadržaju i link building aktivnostima."
     },
     {
       question: "Da li garantujete prva pozicija Google posle SEO optimizacije?",
-      answer: "Ne možemo garantovati jer se Google algoritam menja. Garantujemo porast pozicija i saobraćaja kroz White Hat SEO."
+      answer: "Niko ne može garantovati prvu poziciju jer se Google algoritam stalno menja. Međutim, garantujemo poboljšana rangiranja i rast organskog saobraćaja. Koristimo samo White Hat SEO tehnike koje su održive dugoročno."
     },
     {
       question: "Šta je uključeno u mesečnu SEO optimizaciju?",
-      answer: "Mesečni paket uključuje kontinuirano praćenje pozicija, kreiranje SEO optimizovanog sadržaja, link building aktivnosti, tehničke optimizacije, analizu konkurencije i detaljne mesečne izveštaje sa preporukama."
+      answer: "Mesečni paketi uključuju kontinuirano praćenje pozicija, kreiranje SEO optimizovanog sadržaja, link building aktivnosti, tehnička optimizacija, analiza konkurencije i detaljni mesečni izveštaji sa preporukama. Cena zavisi od broja ključnih reči i konkurencije u vašoj industriji."
     },
     {
       question: "Da li radite lokalni SEO za Beograd i Srbiju?",
-      answer: "Da, specijalizovani smo za lokalnu SEO optimizaciju. Optimizujemo vaš Google My Business profil, lokalne direktorijume, i targetiramo ključne reči specifične za Beograd, Novi Sad i druge gradove u Srbiji."
+      answer: "Da, specijalizovani smo za lokalnu SEO optimizaciju. Optimizujemo vaš Google My Business profil, lokalne direktorijume, i targetiramo ključne reči specifične za Beograd, Novi Sad i druge gradove u Srbiji. Lokalni SEO je često ekonomičnija i brža opcija za mala i srednja preduzeća."
     },
     {
       question: "Mogu li dobiti SEO optimizaciju ako tek pravim sajt?",
-      answer: "Apsolutno! To je zapravo idealno vreme da počnete sa SEO optimizacijom. Kada sajt pravimo od nule sa osnovama (tehnički SEO, pravilna struktura, optimizovane performanse), kasnija SEO optimizacija je jednostavnija i daje brže rezultate."
+      answer: "Apsolutno! To je zapravo idealno vreme da počnete sa SEO optimizacijom. Kada sajt pravimo od nule sa osnovama (tehnički SEO, pravilna struktura, optimizovane performanse), kasnija SEO optimizacija je jednostavnija i daje brže rezultate. Cena je često niža jer nema potrebe za velikim popravkama."
     },
     {
       question: "Šta je razlika između SEO optimizacije i Google Ads oglašavanja?",
-      answer: "SEO optimizacija donosi organske (besplatne) rezultate na dugi rok - jednom optimizovan sajt nastavlja da privlači posetioce bez stalnih troškova. Google Ads daje trenutne rezultate ali zahteva kontinuiranu investiciju."
+      answer: "SEO optimizacija donosi organske (besplatne) rezultate na dugi rok - jednom optimizovan sajt nastavlja da privlači posetioce bez stalnih troškova. Google Ads daje trenutne rezultate ali zahteva kontinuiranu investiciju - čim prestanete da plaćate, nestaju i rezultati. SEO je dugoročna strategija sa boljim ROI, dok su Ads idealni za brze kampanje. Najbolji pristup je kombinacija oba."
     },
     {
       question: "Kako merite uspeh SEO optimizacije?",
-      answer: "Pratimo ključne metrike: pozicije ključnih reči u Google pretrazi, organsku poseticu, vreme na sajtu, conversion rate, bounce rate i ROI. Dobijate detaljne mesečne izveštaje sa jasnim grafikonima i preporukama za dalji rad."
+      answer: "Pratimo nekoliko ključnih metrika: pozicije ključnih reči na Google-u, organski saobraćaj (broj posetilaca sa pretraživača), bounce rate, vreme provedeno na sajtu, broj konverzija i ROI. U mesečnim izveštajima vidite jasne brojke i grafike koji pokazuju napredak. Fokusiramo se na metrike koje direktno utiču na vaš biznis - ne samo na pozicije, već i na kvalitet saobraćaja i konverzije."
     }
   ] : [];
 
@@ -84,8 +84,8 @@ export function SEOPage() {
       {/* SEO Meta Tags - OPTIMIZOVANO za ključne reči */}
       <SEOHelmet
         title={language === 'sr' 
-          ? 'SEO Optimizacija Cena | SEO Optimizacija Sajta | Prva Pozicija Google'
-          : 'SEO Optimization Price | Website SEO | First Google Position'
+          ? 'SEO Optimizacija Cena | SEO Optimizacija Sajta Beograd | AiSajt'
+          : 'SEO Optimization Price | SEO Optimization Belgrade | AiSajt'
         }
         description={language === 'sr'
           ? 'SEO optimizacija sajta za prvu poziciju na Google u Beogradu i Srbiji. Profesionalna SEO optimizacija - cena od 250€. Besplatna analiza sajta. Dovedite svoj web sajt na prvu stranicu Google pretrage.'
@@ -128,7 +128,7 @@ export function SEOPage() {
               <div className="text-center mb-8 md:mb-12">
                 {/* H1 - Glavna ključna reč */}
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-4 md:mb-6 px-2 animate-fade-in-up animation-delay-200">
-                  {language === 'sr' ? 'SEO Optimizacija Cena' : 'SEO Optimization Price'}
+                  {language === 'sr' ? 'SEO Optimizacija Cena - Beograd' : 'SEO Optimization Price'}
                 </h1>
 
                 {/* Description */}
@@ -199,12 +199,7 @@ export function SEOPage() {
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                       Šta Podrazumeva Profesionalna SEO Optimizacija?
                     </h2>
-                    {/* Mobile text - shorter (30% reduction) */}
-                    <p className="text-base md:hidden text-gray-700 leading-relaxed">
-                      Optimizacija sajta kombinuje tehničke optimizacije, content marketing i link building. Ovo je dugoročna strategija koja zahteva planiranje i stručnost.
-                    </p>
-                    {/* Desktop text - full */}
-                    <p className="hidden md:block text-lg text-gray-700 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                       Optimizacija sajta za pretraživače je sveobuhvatan proces koji kombinuje tehničke optimizacije, content marketing, link building i kontinuiranu analizu rezultata. Ovo nije jednokratna intervencija - već dugoročna strategija koja zahteva planiranje, strpljenje i stručnost. Profesionalni pristup znači razumevanje algoritama Google-a, ponašanja korisnika i konkurencije u vašoj industriji.
                     </p>
                   </div>
@@ -214,12 +209,7 @@ export function SEOPage() {
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                       Koliko Košta SEO Optimizacija u Beogradu i Srbiji?
                     </h2>
-                    {/* Mobile text - shorter (30% reduction) */}
-                    <p className="text-base md:hidden text-gray-700 leading-relaxed">
-                      Cena zavisi od više faktora. Osnovna usluga počinje od 250€ mesečno, napredni paketi 500€+. Nakon besplatne analize dobijate jasnu ponudu sa očekivanim rezultatima.
-                    </p>
-                    {/* Desktop text - full */}
-                    <p className="hidden md:block text-lg text-gray-700 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                       Cena u Beogradu, Novom Sadu i širom Srbije zavisi od više faktora. Osnovna usluga počinje od 250€ mesečno, dok napredni paketi za visoko konkurentne ključne reči mogu koštati 500€+ mesečno. Važno je razumeti da cena nije fiksna - zavisi od broja ključnih reči, konkurencije, trenutnog stanja sajta i vaših ciljeva. Naš pristup je transparentan: nakon besplatne analize, dobijate jasnu ponudu sa očekivanim rezultatima i vremenskim okvirom.
                     </p>
                   </div>
@@ -229,12 +219,7 @@ export function SEOPage() {
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                       Zašto Je SEO Optimizacija Sajta Neophodna za Vaš Biznis?
                     </h2>
-                    {/* Mobile text - shorter (30% reduction) */}
-                    <p className="text-base md:hidden text-gray-700 leading-relaxed mb-4">
-                      Bez optimizacije, vaš sajt je nevidljiv. Preko 75% korisnika ne pregleda drugu stranicu Google rezultata. Ova strategija donosi ljude koji traže proizvode ili usluge koje nudite.
-                    </p>
-                    {/* Desktop text - full */}
-                    <p className="hidden md:block text-lg text-gray-700 leading-relaxed mb-4">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
                       Bez kvalitetne optimizacije za pretraživače, vaš sajt je praktično nevidljiv za potencijalne klijente. Statistika pokazuje da preko 75% korisnika nikada ne pregleda drugu stranicu Google rezultata. Ako ste na trećoj ili četvrtoj strani, šanse da vas neko pronađe su minimalne. Ova strategija donosi kvalitetan organski saobraćaj - ljude koji aktivno traže proizvode ili usluge koje vi nudite.
                     </p>
                     <p className="text-base md:text-lg text-gray-700 leading-relaxed">
@@ -344,29 +329,15 @@ export function SEOPage() {
                 <div className="prose prose-lg max-w-none">
                   {language === 'sr' ? (
                     <>
-                      {/* Mobile text - shorter (30% reduction) */}
-                      <p className="text-base md:hidden text-gray-700 mb-4 leading-relaxed">
-                        SEO je proces poboljšanja vidljivosti sajta u organskim rezultatima pretraživača. Niz tehničkih intervencija koje dovode do boljeg rangiranja.
-                      </p>
-                      
-                      <p className="text-base md:hidden text-gray-700 mb-4 leading-relaxed">
-                        Ovo je kontinuiran proces praćenja i prilagođavanja. Cena zavisi od konkurencije, broja ključnih reči i trenutnog stanja sajta.
-                      </p>
-
-                      <p className="text-base md:hidden text-gray-700 mb-4 leading-relaxed">
-                        Paketi se kreću od 250€ do preko 1000€ mesečno. Za lokalni biznis fokus je na lokalnom targetiranju.
-                      </p>
-
-                      {/* Desktop text - full */}
-                      <p className="hidden md:block text-lg text-gray-700 mb-4 leading-relaxed">
+                      <p className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed">
                         SEO (Search Engine Optimization) je proces poboljšanja vidljivosti vašeg web sajta u organskim rezultatima pretraživača kao što su Google, Bing i Yahoo. Mislimo na niz tehničkih i sadržajnih intervencija koje dovode do boljeg rangiranja.
                       </p>
                       
-                      <p className="hidden md:block text-lg text-gray-700 mb-4 leading-relaxed">
+                      <p className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed">
                         Ovo nije jednokratna aktivnost - već kontinuiran proces praćenja, analiziranja i prilagođavanja. Cena zavisi od više faktora: konkurencije u vašoj industriji, broja ključnih reči koje targetirate, trenutnog stanja sajta, i vaših ciljeva.
                       </p>
 
-                      <p className="hidden md:block text-lg text-gray-700 mb-4 leading-relaxed">
+                      <p className="text-base md:text-lg text-gray-700 mb-4 leading-relaxed">
                         Paketi se kreću od 250€ do preko 1000€ mesečno, zavisno od obima posla. Za lokalni biznis u Beogradu ili Novom Sadu, fokus je često na lokalnom targetiranju, što je ekonomičnija opcija. Za kompanije koje targetiraju šire tržište, potrebna je napredna strategija koja obuhvata nacionalni ili međunarodni targeting.
                       </p>
                     </>
@@ -1582,28 +1553,16 @@ export function SEOPage() {
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link 
-                  to="/"
+                  to="/izrada-sajta-cena"
                   className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-700 hover:border-violet-500 hover:text-violet-600 transition-colors text-sm font-medium"
                 >
                   {language === 'sr' ? 'Izrada Web Sajta' : 'Website Development'}
                 </Link>
                 <Link 
-                  to="/"
+                  to="/web-dizajn"
                   className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-700 hover:border-violet-500 hover:text-violet-600 transition-colors text-sm font-medium"
                 >
                   {language === 'sr' ? 'Web Dizajn' : 'Web Design'}
-                </Link>
-                <Link 
-                  to="/"
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-700 hover:border-violet-500 hover:text-violet-600 transition-colors text-sm font-medium"
-                >
-                  {language === 'sr' ? 'Digital Marketing' : 'Digital Marketing'}
-                </Link>
-                <Link 
-                  to="/"
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-700 hover:border-violet-500 hover:text-violet-600 transition-colors text-sm font-medium"
-                >
-                  {language === 'sr' ? 'E-commerce' : 'E-commerce'}
                 </Link>
               </div>
             </div>

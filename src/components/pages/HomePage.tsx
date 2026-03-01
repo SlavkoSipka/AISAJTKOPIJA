@@ -199,8 +199,8 @@ export function HomePage() {
           : 'AI Sajt - Website Development Agency | SEO Optimization | Belgrade'
         }
         description={language === 'sr'
-          ? 'AI Sajt - agencija iz Beograda. Profesionalna izrada sajtova i SEO optimizacija. Radimo širom Srbije - Beograd, Novi Sad.'
-          : 'AI Sajt - agency from Belgrade. Professional website development and SEO optimization. We work across Serbia - Belgrade, Novi Sad.'
+          ? 'Profesionalna izrada web sajta u Beogradu od 7 dana. AiSajt agencija — 50+ klijenata, transparentne cene, besplatna konsultacija.'
+          : 'Professional website development in Belgrade in 7 days. AiSajt agency — 50+ clients, transparent pricing, free consultation.'
         }
         keywords={language === 'sr'
           ? 'agencija za izradu sajta, seo optimizacija, izrada sajta cena, seo optimizacija cena, web agencija beograd, aisajt'
@@ -512,9 +512,9 @@ export function HomePage() {
                 </div>
               </div>
               <div className="space-y-4 md:space-y-6 service-text-reveal service-delay-2 relative z-10">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                   {language === 'sr' ? 'Izrada Web Sajta' : 'Website Development'}
-                </h2>
+                </h3>
                 <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
                   {language === 'sr' ? (
                     <>
@@ -582,9 +582,9 @@ export function HomePage() {
               </div>
               
               <div className="space-y-4 md:space-y-6 order-2 md:order-1 service-text-reveal service-delay-2 relative z-10">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                   {language === 'sr' ? 'SEO Optimizacija' : 'SEO Optimization'}
-                </h2>
+                </h3>
                 <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
                   {language === 'sr' ? (
                     <>
@@ -592,7 +592,7 @@ export function HomePage() {
                       <Link to="/seo-optimizacija-cena" className="text-indigo-600 hover:text-indigo-700 font-semibold underline">
                         SEO optimizacija cena
                       </Link>
-                      {' '}sa transparentnim paketime.
+                      {' '}sa transparentnim paketima.
                     </>
                   ) : (
                     <>
@@ -674,9 +674,9 @@ export function HomePage() {
                 </div>
               </div>
               <div className="space-y-4 md:space-y-6 service-text-reveal service-delay-3 relative z-10">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                   {language === 'sr' ? 'Web Dizajn' : 'Web Design'}
-                </h2>
+                </h3>
                 <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
                   {language === 'sr' ? (
                     <>

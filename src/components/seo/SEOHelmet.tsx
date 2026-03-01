@@ -150,15 +150,10 @@ export function SEOHelmet({
               "value": "68380103"
             },
             "priceRange": "€€",
+            "currenciesAccepted": "EUR, RSD",
+            "paymentAccepted": "Cash, Credit Card, Bank Transfer",
             "openingHours": "Mo-Fr 09:00-18:00",
-            "areaServed": {
-              "@type": "Place",
-              "name": "Srbija",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "RS"
-              }
-            },
+            "areaServed": ["Beograd", "Novi Sad", "Srbija"],
             "sameAs": [
               "https://www.instagram.com/aisajt",
               "https://www.facebook.com/aisajt"
